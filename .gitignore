@@ -1,0 +1,7 @@
+# Proprietary: Bentley service manual (copyrighted, ~200 MB). Keep it local only.
+Bentley*.pdf
+*.pdf
+
+__pycache__/
+*.pyc
+.DS_Store

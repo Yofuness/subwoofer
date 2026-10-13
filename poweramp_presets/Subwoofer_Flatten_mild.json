@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Sub Flatten - Mild (-6)",
+    "preamp": 0.0,
+    "parametric": true,
+    "bands": [
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 17,
+        "q": 0.71,
+        "gain": -15.0,
+        "color": 0
+      },
+      {
+        "type": 1,
+        "channels": 0,
+        "frequency": 150,
+        "q": 0.71,
+        "gain": -6.0,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 48,
+        "q": 3.6,
+        "gain": -2.4,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 154,
+        "q": 1.88,
+        "gain": -2.6,
+        "color": 0
+      }
+    ]
+  }
+]

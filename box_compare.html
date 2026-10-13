@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sub Box Compare</title>
+<style>
+:root{--bg:#fafaf8;--card:#fff;--ink:#141413;--muted:#6b6a65;--line:#e3e2dc;--accent:#2a78d6}
+@media (prefers-color-scheme:dark){:root{--bg:#171716;--card:#1f1f1e;--ink:#f0efec;--muted:#a3a29b;--line:#33332f;--accent:#3987e5}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px}
+.sub{color:var(--muted);margin:0 0 16px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--muted);font-weight:500}
+td input[type=number]{width:70px}
+input,select,button{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 6px}
+button{cursor:pointer}
+.sw{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:9px;margin:0 3px 2px 0;background:#e6f1fb;color:#0c447c}
+.tag.claude{background:#faece7;color:#712b13}.tag.preferred{background:#e1f5ee;color:#085041}
+@media (prefers-color-scheme:dark){.tag{background:#0c447c;color:#e6f1fb}.tag.claude{background:#712b13;color:#faece7}.tag.preferred{background:#085041;color:#e1f5ee}}
+.tags input{width:120px;font-size:11px;display:block;margin-top:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:13px;color:var(--muted);margin-bottom:8px}
+.chart{position:relative;height:420px}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+<h1>Sub box compare: Pioneer TS-W304R in a Mk4 Jetta</h1>
+<p class="sub">Lumped-parameter model, same as <code>max_spl.py</code>. Amp: GM-3500T bridged, 185 W (27.2 V). Xmax 4.7 mm. 1 m half-space, before cabin gain unless toggled.</p>
+
+<div class="card">
+  <div class="tabs" id="tabs"></div>
+  <div class="opts">
+    <label><input type="checkbox" id="cabin"> Add rough Mk4 cabin gain</label>
+    <label><input type="checkbox" id="lpf"> Amp 80 Hz LPF (12 dB/oct)</label>
+    <label><input type="checkbox" id="sub"> Apply each box's subsonic filter</label>
+  </div>
+  <div class="chart"><canvas id="c"></canvas></div>
+  <div class="note" id="explain"></div>
+</div>
+
+<div class="card scroll">
+  <table>
+    <thead><tr><th>Show</th><th></th><th>Tags</th><th>Name</th><th>Net Vb (L)</th><th>fb (Hz, blank = sealed)</th><th>Port area (in²)</th><th>Subsonic (Hz)</th><th>Port length</th><th>Peak port speed</th><th>Max SPL @20 / 25 / 30 / 40</th><th></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p style="margin:10px 0 0"><button id="add">+ Add box</button> <button id="reset">Reset to defaults</button></p>
+  <p class="note">Edits are saved in this browser. Port length uses L = A·c²/(ω_b²·Vb) − 0.732·r (slot against a wall, one flanged end). It's a starting point: build long and trim. Port speed above ~17 m/s risks chuffing. Subsonic = 4th-order Butterworth high-pass (24 dB/oct).</p>
+</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const RHO=1.18,C=343,FS=28.6,QMS=13.3,VAS=77.9e-3,RE=3.0,BL=10.4,SD=0.052,MMS=0.150,XMAX=4.7e-3;
+const CMS=VAS/(RHO*C*C*SD*SD),RMS=2*Math.PI*FS*MMS/QMS,VAMP=Math.sqrt(185*4),V1W=2.0,IN2=0.00064516;
+const COLORS=['#eb6834','#2a78d6','#1baf7a','#eda100','#e87ba4','#6250d6','#008300','#e34948'];
+const DASH=[[6,4],[],[],[2,3],[8,3,2,3],[],[4,4],[1,2]];
+const F=[];for(let f=10;f<=200;f*=1.02)F.push(f);
+
+const cx=(re,im)=>({re,im}),add=(a,b)=>cx(a.re+b.re,a.im+b.im),sub=(a,b)=>cx(a.re-b.re,a.im-b.im),
+ mul=(a,b)=>cx(a.re*b.re-a.im*b.im,a.re*b.im+a.im*b.re),
+ div=(a,b)=>{const d=b.re*b.re+b.im*b.im;return cx((a.re*b.re+a.im*b.im)/d,(a.im*b.re-a.re*b.im)/d)},
+ abs=a=>Math.hypot(a.re,a.im),inv=a=>div(cx(1,0),a),sc=(a,k)=>cx(a.re*k,a.im*k);
+
+function model(box,f){
+  const w=2*Math.PI*f,jw=cx(0,w),cab=box.vb*1e-3/(RHO*C*C);
+  let zab,map=null;
+  if(box.fb){map=1/((2*Math.PI*box.fb)**2*cab);const ral=7/(2*Math.PI*box.fb*cab);
+    zab=inv(add(add(mul(jw,cx(cab,0)),inv(mul(jw,cx(map,0)))),cx(1/ral,0)));}
+  else zab=inv(mul(jw,cx(cab,0)));
+  const zm=add(add(add(mul(jw,cx(MMS,0)),cx(RMS+BL*BL/RE,0)),inv(mul(jw,cx(CMS,0)))),sc(zab,SD*SD));
+  const u=div(cx(BL/RE,0),zm);                    // cone velocity per volt
+  const uc=sc(u,SD),p=mul(uc,zab);
+  const up=map?div(p,mul(jw,cx(map,0))):cx(0,0);
+  return {x:abs(div(u,jw)),ut:abs(sub(up,uc)),up:abs(up)};
+}
+const spl=(ut,v,f)=>20*Math.log10(RHO*f*ut*v/2e-5);   // half-space 1 m: p = rho*w*U/(2*pi*r)
+const hpf4=(f,fc)=>fc?-10*Math.log10(1+(fc/f)**8):0;
+const lpf=f=>{const r=f/80;return -20*Math.log10(Math.sqrt((1-r*r)**2+(r/0.707)**2))};
+const cabin=f=>f<45?Math.min(40*Math.log10(45/f),14):0;
+
+function curves(box,opt){
+  const resp=[],maxs=[],exc=[],pv=[];
+  for(const f of F){
+    const m=model(box,f),sub=opt.sub?hpf4(f,box.subsonic):0,gs=10**(sub/20);
+    const extra=(opt.cabin?cabin(f):0)+(opt.lpf?lpf(f):0);
+    resp.push({x:f,y:spl(m.ut,V1W,f)+sub+extra});
+    const vmax=Math.min(VAMP*gs,XMAX/m.x);       // drive is limited by amp (after subsonic) or Xmax
+    maxs.push({x:f,y:spl(m.ut,vmax,f)+extra});
+    exc.push({x:f,y:m.x*VAMP*gs*1000});
+    pv.push({x:f,y:box.fb&&box.area?m.up*vmax/(box.area*IN2):null});
+  }
+  return {resp,maxs,exc,pv};
+}
+function portLen(box){
+  if(!box.fb||!box.area)return null;
+  const A=box.area*IN2,r=Math.sqrt(A/Math.PI);
+  return (A*C*C/((2*Math.PI*box.fb)**2*box.vb*1e-3)-0.732*r)/0.0254;
+}
+
+const DEFAULTS_VERSION=5;
+const DEFAULTS=[
+ {id:'cur',name:'Sealed: current (36.96 L)',vb:36.96,fb:null,area:null,subsonic:20,show:true},
+ {id:'s69',name:'Sealed: medium (69 L)',vb:69.1,fb:null,area:null,subsonic:20,show:true},
+ {id:'s100',name:'Sealed: large (100 L)',vb:100,fb:null,area:null,subsonic:20,show:true},
+ {id:'p22c',name:'Ported 22 Hz: compact (45 L)',tags:['claude','preferred'],vb:45,fb:22,area:10,subsonic:18,show:true},
+ {id:'p22',name:'Ported 22 Hz: big (90.6 L)',tags:['preferred'],vb:90.6,fb:22,area:18,subsonic:18,show:true},
+ {id:'p22s',name:'Ported 22 Hz: compact, small port (45 L, 8 in²)',vb:45,fb:22,area:8,subsonic:18,show:false},
+ {id:'p25h',name:'Ported 25 Hz: half-size (40 L)',vb:40,fb:25,area:10,subsonic:20,show:false},
+ {id:'p24',name:'Ported 24 Hz: big (90.6 L)',tags:['claude'],vb:90.6,fb:24,area:25.4,subsonic:20,show:false},
+ {id:'p27',name:'Ported 27 Hz: big (90.6 L)',vb:90.6,fb:27,area:25.4,subsonic:23,show:false},
+];
+let boxes,ver=0;
+try{boxes=JSON.parse(localStorage.getItem('subboxes'));ver=+localStorage.getItem('subboxes_ver')||0}catch(e){}
+if(!Array.isArray(boxes)||!boxes.length)boxes=structuredClone(DEFAULTS);
+else if(ver<DEFAULTS_VERSION){            // add back any preset that's missing; keep the user's edits and custom boxes
+  if(ver<4)boxes=[...structuredClone(DEFAULTS.slice(0,5)),...boxes.filter(b=>!b.id)];
+  for(const d of DEFAULTS)if(!boxes.some(b=>b.id===d.id))boxes.push(structuredClone(d));
+  const rank=b=>{const i=DEFAULTS.findIndex(d=>d.id===b.id);return i<0?999:i};boxes.sort((x,y)=>rank(x)-rank(y));
+}
+try{localStorage.setItem('subboxes_ver',DEFAULTS_VERSION)}catch(e){}
+const save=()=>{try{localStorage.setItem('subboxes',JSON.stringify(boxes))}catch(e){}};
+
+const VIEWS={
+ maxs:{t:'Max clean output',y:'Max SPL before Xmax or 185 W limit (dB @ 1 m)',ex:'The loudest each box can play cleanly at each frequency. Below ~60 Hz this sub is usually Xmax-limited, so this is the "how loud can it get" chart. DSP can cut this curve but never raise it.'},
+ resp:{t:'Response @ 1 W',y:'SPL @ 1 W (2 V), 1 m (dB)',ex:'Small-signal frequency response at the same input voltage: the shape you would EQ.'},
+ exc:{t:'Cone excursion @ 185 W',y:'Excursion at full amp power (mm)',ex:'How far the cone moves at full power. The dashed line is Xmax (4.7 mm). Anything above it is distortion territory, and well above it risks damage. Turn on "subsonic" to see the filter protect the ported boxes below tuning.'},
+ pv:{t:'Port air speed',y:'Peak port air speed at max clean output (m/s)',ex:'Air speed in the port when playing at the max-clean-output level. Keep it under ~17 m/s (dashed) to avoid chuffing.'},
+};
+let view='maxs';
+const tabs=document.getElementById('tabs');
+for(const k in VIEWS){const b=document.createElement('button');b.textContent=VIEWS[k].t;b.onclick=()=>{view=k;draw()};b.dataset.k=k;tabs.appendChild(b)}
+
+const dark=matchMedia('(prefers-color-scheme: dark)').matches,grid=dark?'#2c2c2a':'#e1e0d9',tick='#898781';
+const chart=new Chart(document.getElementById('c'),{type:'line',data:{datasets:[]},
+ options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:{labels:{color:tick,boxHeight:2,filter:i=>!i.text.startsWith('_')}},
+  tooltip:{filter:i=>!i.dataset.label.startsWith('_'),callbacks:{title:i=>Math.round(i[0].parsed.x)+' Hz',label:i=>i.dataset.label+': '+(i.parsed.y==null?'n/a':i.parsed.y.toFixed(1))}}},
+ scales:{x:{type:'logarithmic',min:10,max:200,grid:{color:grid},ticks:{color:tick,autoSkip:false,callback:v=>[10,15,20,25,30,40,50,60,80,100,150,200].includes(Math.round(v))?Math.round(v):''},title:{display:true,text:'Frequency (Hz)',color:tick}},
+  y:{grid:{color:grid},ticks:{color:tick},title:{display:true,color:tick}}}}});
+
+function draw(){
+  const opt={cabin:cab.checked,lpf:lp.checked,sub:sb.checked};
+  [...tabs.children].forEach(b=>b.classList.toggle('on',b.dataset.k===view));
+  const ds=[];
+  boxes.forEach((b,i)=>{if(!b.show)return;const c=curves(b,opt);
+    ds.push({label:b.name,data:c[view],borderColor:COLORS[i%8],borderDash:DASH[i%8],borderWidth:2,pointRadius:0,spanGaps:false});});
+  if(view==='exc')ds.push({label:'_xmax',data:[{x:10,y:4.7},{x:200,y:4.7}],borderColor:tick,borderDash:[3,3],borderWidth:1,pointRadius:0});
+  if(view==='pv')ds.push({label:'_lim',data:[{x:10,y:17},{x:200,y:17}],borderColor:tick,borderDash:[3,3],borderWidth:1,pointRadius:0});
+  chart.data.datasets=ds;
+  const y=chart.options.scales.y;y.title.text=VIEWS[view].y;
+  if(view==='exc'){y.min=0;y.max=20}else if(view==='pv'){y.min=0;y.max=25}else if(view==='resp'){y.min=60;y.max=110}else{y.min=75;y.max=125}
+  chart.update();document.getElementById('explain').textContent=VIEWS[view].ex;renderRows(opt);
+}
+function renderRows(opt){
+  const tb=document.getElementById('rows');tb.innerHTML='';
+  boxes.forEach((b,i)=>{
+    const tr=document.createElement('tr');const L=portLen(b);
+    const c=curves(b,{...opt,cabin:false,lpf:false});const at=f=>{let k=0;while(F[k]<f)k++;return c.maxs[k].y.toFixed(0)};
+    const pvmax=b.fb&&b.area?Math.max(...c.pv.filter(p=>p.x>=(b.subsonic||10)).map(p=>p.y||0)):null;
+    tr.innerHTML=`<td><input type="checkbox" ${b.show?'checked':''} data-k="show"></td>
+     <td><span class="sw" style="background:${COLORS[i%8]}"></span></td>
+     <td class="tags">${(b.tags||[]).map(t=>`<span class="tag ${t.replace(/[^a-z0-9_-]/gi,'')}">${t.replace(/[<&"]/g,'')}</span>`).join('')}<input data-k="tags" placeholder="add, comma, separated" value="${(b.tags||[]).join(', ').replace(/"/g,'&quot;')}"></td>
+     <td><input data-k="name" value="${b.name.replace(/"/g,'&quot;')}" style="width:190px"></td>
+     <td><input type="number" step="0.1" data-k="vb" value="${b.vb}"></td>
+     <td><input type="number" step="0.5" data-k="fb" value="${b.fb??''}"></td>
+     <td><input type="number" step="0.5" data-k="area" value="${b.area??''}" ${b.fb?'':'disabled'}></td>
+     <td><input type="number" step="1" data-k="subsonic" value="${b.subsonic??''}"></td>
+     <td>${L?L.toFixed(1)+'"':'n/a'}</td>
+     <td>${pvmax!=null?pvmax.toFixed(1)+' m/s':'n/a'}</td>
+     <td>${at(20)} / ${at(25)} / ${at(30)} / ${at(40)} dB</td>
+     <td><button data-del>✕</button></td>`;
+    tr.querySelectorAll('input').forEach(inp=>inp.onchange=()=>{const k=inp.dataset.k;
+      if(k==='show')b.show=inp.checked;else if(k==='name')b.name=inp.value;
+      else if(k==='tags')b.tags=inp.value.split(',').map(s=>s.trim()).filter(Boolean);
+      else{const v=parseFloat(inp.value);b[k]=isNaN(v)||v<=0?null:v;if(k==='vb'&&!b.vb)b.vb=1;}
+      save();draw();});
+    tr.querySelector('[data-del]').onclick=()=>{boxes.splice(i,1);save();draw()};
+    tb.appendChild(tr);});
+}
+const cab=document.getElementById('cabin'),lp=document.getElementById('lpf'),sb=document.getElementById('sub');
+[cab,lp,sb].forEach(e=>e.onchange=draw);
+document.getElementById('add').onclick=()=>{boxes.push({name:'Custom',vb:80,fb:25,area:20,subsonic:20,show:true});save();draw()};
+document.getElementById('reset').onclick=()=>{boxes=structuredClone(DEFAULTS);save();draw()};
+draw();
+</script>
+</body>
+</html>
