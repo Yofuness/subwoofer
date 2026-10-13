@@ -11,7 +11,7 @@ presets for the in-car response. (It started out as a sealed design; see PLAN.md
 
 ## Files
 - `subwoofer.skp`: the user's SketchUp 2026 model of the existing box. It's a ZIP after a header; the geometry is float64 inches in `model.dat` (see SPECS.md for the extraction method)
-- `Bentley VW MKIV Manual - Complete.pdf`: 1,984 pp, already searched. It has no trunk interior dimensions
+- `Bentley VW MKIV Manual - Complete.pdf`: 1,984 pp, already searched. It has no trunk interior dimensions. **Proprietary: git-ignored, never commit it**
 - `max_spl.py`: max clean SPL (Xmax / 185 W-limited) for sealed vs vented boxes; import `max_spl()` for comparisons
 - `box_compare.html`: interactive comparison page (max SPL, 1 W response, excursion @ 185 W, port speed, port length). It's the same model as `max_spl.py` ported to JS; keep the two in sync. Add new candidate boxes to `DEFAULTS` in it
 - `eq_design.py`: models box + cabin and fits cut-only biquads, then exports the Poweramp JSON
@@ -22,6 +22,9 @@ presets for the in-car response. (It started out as a sealed design; see PLAN.md
   SUBWOOFER_EQ_NOTES.md when the EQ work changes.
 - Mark the source and confidence of anything not measured by the user (e.g. "unverified, forum snippet").
 - When values conflict, record both and explain which one wins and why. Don't silently overwrite.
+
+## Git
+- Git repo on `main` (local only, no remote). Commit doc/model changes as you go. `.gitignore` excludes all PDFs (the Bentley manual is proprietary).
 
 ## Working with the user
 - Technically minded. Show the math and the mechanism behind every recommendation.
