@@ -59,6 +59,7 @@ a built-in adjustable subsonic filter (the GM-3500T has none), class-D efficienc
   block it. Openings in front of the port should total well over the port area (18 in²). Adds ~1.5" to overall depth. ≈ $30–50.
   Depth check: surround height (assumed ~0.75", **measure it**) + ~2× Xmax on peaks (~0.4") ≈ 1.15" minimum clearance.
 
+- **Material: ¾" MDF** (2026-10-14, Johann). Over Baltic birch for cost and easy, clean cutting. Seal it against moisture (carpet/paint/primer; bottom panel especially). Use T-nuts for the driver and pre-drill pilot holes, since MDF strips. Avoid construction plywood (voids, so air leaks).
 - **3D printing (2026-10-14):** printing the whole box was rejected: ~15 kg PETG/ASA even with 6 mm ribbed walls, 600–1,000 h of printing,
   15–25 glued sections (leak risk at 22 Hz), wall flex, and PLA softens at ~55–60 °C in a hot trunk. **Plan: an MDF box with printed parts:**
   port U-bends and flared ends, the guard frame (with magnet pockets), wheel-well fit spacers (outside the box), a driver ring/gasket, and a terminal-cup adapter.
