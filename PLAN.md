@@ -57,7 +57,8 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [ ] _(Partly answered: steeper than 10.62°, see Seatback angle above)_ **Re-measure the seatback wedge** (Johann will provide): seatback horizontal depth at the floor vs 16" up (gives the angle), whether it's flat or curved, and any latches or hinges in the way. All v2 designs currently use the 10.62° (3" over 16") slope from subwoofer.skp. Each +1" of lean costs ~0.5" of average depth (~2% Vb)
 - [x] **Wheel-well width measured: 39.5"** (Johann, 2026-10-15). Floor depth allowed: 18"
 - [x] **Seatback profile:** current box with the bottom stretched to 18" (top 10.5") fits; the panel is curved → 25.1° straight back (Johann, 2026-10-15)
-- [ ] **Curve check:** free depth from the seatback to the box's front-face plane at **8" up** must be ≥ 14.25" (the straight-back chord). Also: was the 39.5" at the floor or right at the seatback?
+- [x] **Curve check:** the panel curves away from the box (concave), so the flat 25.1° back clears it (Johann, 2026-10-15). Flat back kept; a two-facet back would gain ~+0.2 dB, not worth it
+- [ ] Was the 39.5" measured at the floor or right at the seatback?
 - [ ] Trunk-lid opening width (must pass the box; MTX JETTA10 at 35¾" is known to fit)
 - [ ] **Johann: pick the v4 size** (75 L 30.8" W / ~84 L 34" W straight port [Claude] / ~97 L 38.5" W)
 - [ ] Get the user's trunk measurements **+ the sub's surround height above the mounting ring** (for guard clearance) (list in SPECS.md → Trunk)

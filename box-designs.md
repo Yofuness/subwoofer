@@ -49,7 +49,7 @@ A straight back from 18" at the floor to 10.5" at 16" up is atan(7.5/16) = **25.
 
 - **Claude's pick: 34" W × 16" H × 18"/10.5" D, 84.3 L, 16 in² × 28" straight floor slot, fb 22 Hz.** It's the same ~84 L the 20° guess gave at 32", but 2" wider because the back leans more. There's 2.75" per side against the 39.5".
 - vs v3 (75 L, 36" × 13.8/10.8): +0.8 dB at 22 Hz, +0.7 dB at 25 Hz, and 2" narrower. The 38.5" max box adds another +1.1/+0.7 dB.
-- ⚠ **Curve check:** a flat back is the straight chord from (18", floor) to (10.5", 16" up); at 8" up it sits 14.25" from the front face. If the seat **bulges** toward the trunk at mid-height, it would hit there; if it's **concave** (more room low down), a two-facet back could add a few litres. **Measure:** the free depth at 8" up (needs ≥ 14.25").
+- ✅ **Curve resolved (Johann, 2026-10-15):** the panel curves *away* from the box (its middle is farthest), so a flat back clears it everywhere. A two-facet back that follows the curve would add only ~4 L per 1" of mid-height gap (8 in² × 32.5" inner W), about +0.2 dB at 22 Hz. **Not worth** the extra angled seam, so the back stays flat.
 - The angle-sweep tables below (20° placeholder) are kept for history.
 
 
