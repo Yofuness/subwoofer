@@ -58,7 +58,8 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [x] **Wheel-well width measured: 39.5"** (Johann, 2026-10-15). Floor depth allowed: 18"
 - [x] **Seatback profile:** current box with the bottom stretched to 18" (top 10.5") fits; the panel is curved → 25.1° straight back (Johann, 2026-10-15)
 - [x] **Curve check:** the panel curves away from the box (concave), so the flat 25.1° back clears it (Johann, 2026-10-15). Flat back kept; a two-facet back would gain ~+0.2 dB, not worth it
-- [ ] Was the 39.5" measured at the floor or right at the seatback?
+- [ ] Was the 39.5" measured at the floor or right at the seatback? Measure the well gap at ~1", 8" and 15" up, at the seatback
+- [ ] **Lid-hinge clearance:** do the hinge arms swing into the box's top outer corners when the lid closes? (Mk4 gooseneck hinges, unverified.) Could cap the width more than the wells do. Full list in SPECS.md → Trunk
 - [ ] **Trunk-lid opening width: this now gates the box width.** A 38.5" box must pass through flat; it can't be rotated inside, since its 42.5" plan diagonal is longer than the 39.5" between the wells. The MTX JETTA10 at 35¾" is known to fit
 - [ ] **v4 size: max width (~38.5", ~97 L)**, final number = min(well gap − ~1", lid opening − ~½") once the two measurements above are in
 - [ ] Get the user's trunk measurements **+ the sub's surround height above the mounting ring** (for guard clearance) (list in SPECS.md → Trunk)

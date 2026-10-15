@@ -32,12 +32,13 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 
 - The Bentley manual (`Bentley VW MKIV Manual - Complete.pdf`, 1,984 pp) has **no** interior
   trunk dimensions. It was searched in full; don't search it again for this.
-- **Still need the user's tape measurements:**
-  1. ~~Width between the wheel wells~~ 39.5" (done). Still need: is that at the floor or right at the seatback, and is it the same at 16" up?
-  2. Height from the floor to the underside of the rear shelf, at the seatback.
-  3. Depth from the seatback to the lip, at the floor and at ~16" up (gives the seatback angle). **Most important one now:** angle = atan((depth at floor − depth at 16")/16).
-  4. Trunk lid opening: narrowest width and tallest clear height.
-  5. Obstructions: jack/tool kit, seat-release latches, carpet humps.
+- **Still need the user's tape measurements (revised 2026-10-15 for the max-width v4 box):**
+  1. **Trunk-lid opening, narrowest width** (often at the bottom lip near the latch, or at the top corners by the taillights/hinges). This gates the box width (box ≤ opening − ~½"), since a 38.5 × 18" box (42.5" diagonal) can't be turned inside the 39.5" well gap. Also the clear height at that spot (needs ≳ 17" to pass the box upright).
+  2. **Well gap at the seatback at 3 heights: ~1", 8", 15" off the floor** (the 39.5" location was never stated). The box has to clear the narrowest one.
+  3. **Lid hinges (likely the deal-breaker):** close the lid gently and check whether the hinge arms swing down into the space where the box's top outer corners would be (against the seatback, 16" up, ~19" out from the centreline). Measure the clearance, or the narrowest gap between the two hinge arms at 16" up. _Mk4 sedans are believed to use gooseneck hinges that intrude into the trunk (from memory, unverified)._
+  4. **Floor flatness** over the 18" × 38.5" footprint at the seatback: any humps, tie-downs, or a rise toward the seat.
+  5. Sub surround height above the mounting ring (grille clearance, see PLAN.md).
+  - ~~Rear-shelf height / seatback angle~~ Done: 16" H with the 18"/10.5" profile (2026-10-15).
 
 ## LOC: AudioControl LC2i Pro
 
