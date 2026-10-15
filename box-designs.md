@@ -13,7 +13,8 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: medium** | 69.1 L | n/a | 30" W, 13.5/10.5" D | ~26% | same as current (Xmax-limited) |
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
 | `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
-| `claude` `preferred` | **Ported 22 Hz: medium (17" wide, same as the current box)** | 75.1 L | 14 in² × 27.6" | 17.0" W, 27/24" D (v2) | ~31% | 103/104/105/105/106 |
+| `preferred` | **Ported 22 Hz: medium (17" wide, same as the current box)** | 75.1 L | 14 in² × 27.6" | 17.0" W, 27/24" D (v2) | ~31% | 103/104/105/105/106 |
+| `claude` | **Ported 22 Hz: medium, 16" wide + 1" grate (17" total)** | 69.9 L | 13 in² × 27.6" | 16.0" W, 27/24" D (v2) | ~29% (+ grate) | 102/103/105/105/106 |
 | `preferred` | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
 |  | Ported 25 Hz: half-size | 40 L | 10 in² × 29" | 16.1" W, 18/15" D | ~19% | 96/99/101/104/108 |
@@ -52,7 +53,12 @@ Layout notes:
 - The guard now covers the passenger-side face (plus the port mouth if it's on another face).
 - ⚠ **Wheel well:** a 27"-deep box on the driver's side is likely to run into the wheel well. It has to sit inboard of the well, or be notched around it. **Needs measuring.**
 - **Medium (2026-10-15):** Johann wants to keep the current 17" width. Inner 15.5" × 347.8 in² = 88.3 L gross. Port area was swept at fb 22: 10 in² → 22.3 m/s ✗, 12 → 18.2 ✗, **14 → 15.3 m/s ✓ (75.1 L net, 27.6" port)**, 16 → 13.0 but 71.7 L.
-  Within 0–2 dB of the big box everywhere, and +4 dB over compact at 20–22 Hz. It's now Claude's pick.
+  Within 0–2 dB of the big box everywhere, and +4 dB over compact at 20–22 Hz.
+- **16" + grate (2026-10-15):** Johann asked for 1" less width so a grate fits within the old 17" envelope. Inner 14.5" × 347.8 = 82.6 L gross.
+  Port sweep: 12 in² → 71.4 L, 24.9", 17.2 m/s ✗ · **13 in² → 69.9 L, 27.6", 15.6 m/s ✓** · 14 → 68.2 L, 30.5", 14.2 · 15 → 66.4 L, 33.7", 13.1.
+  Max SPL 20/22/25/30/40 = 102.1/103.2/105.0/104.8/106.4 vs 102.7/103.8/105.5/104.8/106.4 for 17": **−0.6 dB at most**. It's now Claude's pick (the grate is a requirement).
+  ⚠ The grate needs ~1.15" from the mounting ring to the inside of the mesh (assumed 0.75" surround + ~0.4" on hard hits), so **1" is tight. Measure the surround height.**
+  If it needs 1.5", make the box 15.5" (≈ −0.6 dB more).
 - Supersedes the earlier 18"/15"-deep, front-firing geometry (31.4" / 17.9" wide).
 
 ## Compact 22 Hz option (2026-10-13)
