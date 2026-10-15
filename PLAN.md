@@ -40,7 +40,7 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [x] Box-volume conflict resolved: 36.96 L wedge (the 52.7 L rectangle reading was wrong)
 - [ ] _(Only if keeping the current box)_ Re-fit the EQ presets for the real 36.96 L box: `eq_design.py` needs wedge geometry (or a direct Vb override), then re-run. The hump is at ~62 Hz, not ~45–50
 - [x] Built `box_compare.html` to compare all candidate boxes (2026-10-13)
-- [ ] **Size: big (90.6 L, layout v2: 20.2" wide, ~37% of the trunk) vs compact (45 L, 10 in² port, layout v2: 11.7" wide, ~21%, −4–5 dB at 20–25 Hz)?** Johann reacted to the big one with "that's massive". Table in box-designs.md
+- [ ] **Size: medium 17" wide (75.1 L, 14 in² × 27.6" port, ~31% of the trunk, within 0–2 dB of big). Johann wants to keep the current 17" width, and it's Claude's pick.** Alternatives: big (90.6 L, layout v2: 20.2" wide, ~37% of the trunk) vs compact (45 L, 10 in² port, layout v2: 11.7" wide, ~21%, −4–5 dB at 20–25 Hz)?** Johann reacted to the big one with "that's massive". Table in box-designs.md
 - [x] **Tuning chosen: 22 Hz** (2026-10-13). Starting point: ~90.6 L net, 18 in² slot, ~29" port, subsonic ~18 Hz
 - [ ] ⏸ **Don't design the final box yet.** Johann is getting trunk measurements first (his instruction, 2026-10-13)
 - [ ] **Chain low-end test:** with EQ off and AccuBASS off, play 10/15/20/25/30/40/60 Hz tones and read AC volts at the LC2i RCA output (amp off). dB = 20·log10(V/V60). Checks whether the stock head unit rolls off the deep bass. (Bluetooth SBC/AAC and the XY-BT board do not cut lows.)

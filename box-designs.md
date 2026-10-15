@@ -12,7 +12,8 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: current** (existing box) | 36.96 L | n/a | 17" W, 13.5/10.5" D | 15% | 91/93/95/98/103 |
 |  | **Sealed: medium** | 69.1 L | n/a | 30" W, 13.5/10.5" D | ~26% | same as current (Xmax-limited) |
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
-| `claude` `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
+| `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
+| `claude` `preferred` | **Ported 22 Hz: medium (17" wide, same as the current box)** | 75.1 L | 14 in² × 27.6" | 17.0" W, 27/24" D (v2) | ~31% | 103/104/105/105/106 |
 | `preferred` | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
 |  | Ported 25 Hz: half-size | 40 L | 10 in² × 29" | 16.1" W, 18/15" D | ~19% | 96/99/101/104/108 |
@@ -32,14 +33,15 @@ The back keeps the 10.62° seatback slope, so the top is **24"** deep. The box s
 
 Inner cross-section (the side profile): 14.5" tall × 23.99" average depth = 347.8 in², which works out to **5.70 L per inch of inner width**.
 
-| | Compact 45 L @ 22 Hz | Big 90.6 L @ 22 Hz |
-|---|---|---|
-| Port | 10 in² × ~33.4" | 18 in² × ~29.3" |
-| Port air + port wall | 5.5 + ~6.0 L | 8.6 + ~5.2 L |
-| Gross internal | 58.4 L | 106.4 L |
-| **Outer W × H × D** | **11.7" × 16" × 27"/24"** | **20.2" × 16" × 27"/24"** |
-| Outer volume / trunk share | 79 L / ~21% | 135 L / ~37% |
-| Performance | unchanged (same Vb, fb): see tables below | unchanged |
+| | Compact 45 L @ 22 Hz | **Medium 75.1 L @ 22 Hz (17" wide)** | Big 90.6 L @ 22 Hz |
+|---|---|---|---|
+| Port | 10 in² × ~33.4" | **14 in² × ~27.6"** | 18 in² × ~29.3" |
+| Port air + port wall | 5.5 + ~6.0 L | 6.3 + ~4.8 L | 8.6 + ~5.2 L |
+| Gross internal | 58.4 L | **88.3 L** | 106.4 L |
+| **Outer W × H × D** | **11.7" × 16" × 27"/24"** | **17.0" × 16" × 27"/24"** | **20.2" × 16" × 27"/24"** |
+| Outer volume / trunk share | 79 L / ~21% | 114 L / ~31% | 135 L / ~37% |
+| Peak port speed | ~14.6 m/s | ~15.3 m/s | ~13.5 m/s |
+| Max SPL 20/22/25/30/40 | 99/100/102/105/106 | **103/104/105/105/106** | 103/105/107/105/106 |
 
 Layout notes:
 - **Driver on the passenger-side panel** (27"/24" × 16"): the 12.5" frame fits with ~1.75" top/bottom margin. Magnet depth 5.31" + 0.75" panel
@@ -49,6 +51,8 @@ Layout notes:
   (a 10 in² full-height slot would be only 0.69" wide, which is too narrow, so the compact box probably wants something like a 1.25" × 8" slot).
 - The guard now covers the passenger-side face (plus the port mouth if it's on another face).
 - ⚠ **Wheel well:** a 27"-deep box on the driver's side is likely to run into the wheel well. It has to sit inboard of the well, or be notched around it. **Needs measuring.**
+- **Medium (2026-10-15):** Johann wants to keep the current 17" width. Inner 15.5" × 347.8 in² = 88.3 L gross. Port area was swept at fb 22: 10 in² → 22.3 m/s ✗, 12 → 18.2 ✗, **14 → 15.3 m/s ✓ (75.1 L net, 27.6" port)**, 16 → 13.0 but 71.7 L.
+  Within 0–2 dB of the big box everywhere, and +4 dB over compact at 20–22 Hz. It's now Claude's pick.
 - Supersedes the earlier 18"/15"-deep, front-firing geometry (31.4" / 17.9" wide).
 
 ## Compact 22 Hz option (2026-10-13)

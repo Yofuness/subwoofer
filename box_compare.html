@@ -107,12 +107,13 @@ function portLen(box){
   return (A*C*C/((2*Math.PI*box.fb)**2*box.vb*1e-3)-0.732*r)/0.0254;
 }
 
-const DEFAULTS_VERSION=5;
+const DEFAULTS_VERSION=6;
 const DEFAULTS=[
  {id:'cur',name:'Sealed: current (36.96 L)',vb:36.96,fb:null,area:null,subsonic:20,show:true},
  {id:'s69',name:'Sealed: medium (69 L)',vb:69.1,fb:null,area:null,subsonic:20,show:true},
  {id:'s100',name:'Sealed: large (100 L)',vb:100,fb:null,area:null,subsonic:20,show:true},
- {id:'p22c',name:'Ported 22 Hz: compact (45 L)',tags:['claude','preferred'],vb:45,fb:22,area:10,subsonic:18,show:true},
+ {id:'p22c',name:'Ported 22 Hz: compact (45 L)',tags:['preferred'],vb:45,fb:22,area:10,subsonic:18,show:true},
+ {id:'p22m',name:'Ported 22 Hz: medium, 17" wide (75 L)',tags:['claude','preferred'],vb:75.1,fb:22,area:14,subsonic:18,show:true},
  {id:'p22',name:'Ported 22 Hz: big (90.6 L)',tags:['preferred'],vb:90.6,fb:22,area:18,subsonic:18,show:true},
  {id:'p22s',name:'Ported 22 Hz: compact, small port (45 L, 8 in²)',vb:45,fb:22,area:8,subsonic:18,show:false},
  {id:'p25h',name:'Ported 25 Hz: half-size (40 L)',vb:40,fb:25,area:10,subsonic:20,show:false},
@@ -123,7 +124,8 @@ let boxes,ver=0;
 try{boxes=JSON.parse(localStorage.getItem('subboxes'));ver=+localStorage.getItem('subboxes_ver')||0}catch(e){}
 if(!Array.isArray(boxes)||!boxes.length)boxes=structuredClone(DEFAULTS);
 else if(ver<DEFAULTS_VERSION){            // add back any preset that's missing; keep the user's edits and custom boxes
-  if(ver<4)boxes=[...structuredClone(DEFAULTS.slice(0,5)),...boxes.filter(b=>!b.id)];
+  if(ver<4)boxes=[...structuredClone(DEFAULTS.filter(d=>['cur','s69','s100','p22c','p22'].includes(d.id))),...boxes.filter(b=>!b.id)];
+  if(ver<6){const c=boxes.find(b=>b.id==='p22c');if(c&&c.tags)c.tags=c.tags.filter(t=>t!=='claude');}   // 'claude' pick moved to the 17" medium box
   for(const d of DEFAULTS)if(!boxes.some(b=>b.id===d.id))boxes.push(structuredClone(d));
   const rank=b=>{const i=DEFAULTS.findIndex(d=>d.id===b.id);return i<0?999:i};boxes.sort((x,y)=>rank(x)-rank(y));
 }
