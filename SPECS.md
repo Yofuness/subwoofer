@@ -13,7 +13,7 @@ live in [PLAN.md](PLAN.md); the EQ preset work lives in
 
 ### Trunk (Mk4 Jetta sedan)
 
-**Box-space limits from Johann (2026-10-15, by eye, not tape-measured):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
+**Box-space limits from Johann (2026-10-15, by eye; v2, superseded by layout v3: wide along the seatback, see PLAN.md):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
 The box goes on the driver's side, with the driver firing toward the passenger side.
 
 

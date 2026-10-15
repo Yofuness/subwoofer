@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-15 (new size limits; side-firing layout v2)_
+_Last updated: 2026-10-15 (layout v3: wide along the seatback, 75 L)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
@@ -20,7 +20,12 @@ Response shape is fixed with DSP (Poweramp Equalizer → LC2i Pro). Originally t
   there's little to gain.
 - EQ is cut-only. Sub makeup gain comes from the LC2i Pro bass knob (see SUBWOOFER_EQ_NOTES.md).
 
-## Layout constraints (Johann, 2026-10-15, from looking at the car; not yet tape-measured)
+## Layout v3 (Johann, 2026-10-15, later; current)
+- The box goes **at the back of the trunk, against the seatback, very wide and shallow**, along the seatback. **75 L net @ 22 Hz kept** (14 in² × ~27.6" port, straight, no bends).
+- Height 16" and the seatback wedge (10.62°) kept. Front-firing toward the trunk lid. Proposed **36" W × 16" H × 13.8"/10.8" D** (see box-designs.md → Layout v3).
+- Critical measurement: **width between the wheel wells at the seatback** (38⅛" is an unverified forum figure).
+
+## Layout constraints v2 (Johann, 2026-10-15; superseded by v3 above)
 - **Height ≤ current box: 16"** outer.
 - **Depth (seatback → trunk lid) ≤ 2× current: 27"** at the bottom (current is 13.5"). The 10.62° seatback slope is kept, so 24" at the top.
 - **The box sits on the driver's side of the trunk; the driver fires sideways toward the passenger side.**
@@ -40,14 +45,14 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [x] Box-volume conflict resolved: 36.96 L wedge (the 52.7 L rectangle reading was wrong)
 - [ ] _(Only if keeping the current box)_ Re-fit the EQ presets for the real 36.96 L box: `eq_design.py` needs wedge geometry (or a direct Vb override), then re-run. The hump is at ~62 Hz, not ~45–50
 - [x] Built `box_compare.html` to compare all candidate boxes (2026-10-13)
-- [ ] **Size: 16" wide + 1" grate (69.9 L, 13 in² × 27.6" port, −0.6 dB vs 17"). Claude's pick, keeps the 17" total envelope.** Or medium 17" wide (75.1 L, 14 in² × 27.6" port, ~31% of the trunk), which is Johann's width preference. Alternatives: big (90.6 L, layout v2: 20.2" wide, ~37% of the trunk) vs compact (45 L, 10 in² port, layout v2: 11.7" wide, ~21%, −4–5 dB at 20–25 Hz)?** Johann reacted to the big one with "that's massive". Table in box-designs.md
+- [x] **Size settled: 75 L net @ 22 Hz** (Johann, 2026-10-15), built as layout v3 (36" wide along the seatback) Alternatives: big (90.6 L, layout v2: 20.2" wide, ~37% of the trunk) vs compact (45 L, 10 in² port, layout v2: 11.7" wide, ~21%, −4–5 dB at 20–25 Hz)?** Johann reacted to the big one with "that's massive". Table in box-designs.md
 - [x] **Tuning chosen: 22 Hz** (2026-10-13). Starting point: ~90.6 L net, 18 in² slot, ~29" port, subsonic ~18 Hz
 - [ ] ⏸ **Don't design the final box yet.** Johann is getting trunk measurements first (his instruction, 2026-10-13)
 - [ ] **Chain low-end test:** with EQ off and AccuBASS off, play 10/15/20/25/30/40/60 Hz tones and read AC volts at the LC2i RCA output (amp off). dB = 20·log10(V/V60). Checks whether the stock head unit rolls off the deep bass. (Bluetooth SBC/AAC and the XY-BT board do not cut lows.)
 - [ ] **Re-measure the seatback wedge** (Johann will provide): seatback horizontal depth at the floor vs 16" up (gives the angle), whether it's flat or curved, and any latches or hinges in the way. All v2 designs currently use the 10.62° (3" over 16") slope from subwoofer.skp. Each +1" of lean costs ~0.5" of average depth (~2% Vb)
-- [ ] **Check that layout v2 clears the driver-side wheel well:** the box is 27" deep, so where does the well start and end front-to-back, and how far does it stick in?
+- [ ] **Layout v3 fit:** measure the width between the wheel wells **right at the seatback** and up to 16" high, plus the floor depth. The box is 36" wide and 13.8" deep at the bottom
 - [ ] Get the user's trunk measurements **+ the sub's surround height above the mounting ring** (for guard clearance) (list in SPECS.md → Trunk)
-- [ ] Final **ported 22 Hz** box design + cut list (after measurements), **based on layout v2 (side-firing, 16" H × 27"/24" D)**. Earlier 27 Hz sketch, for reference: 32" W × 16" H × 18"/15" deep, slot port 1.75" × 14.5" × ~27" L-shaped, fb 27 Hz, ~90.6 L net (see box-designs.md). _Old sealed starting point, now superseded:_ 30" W × 16" H, **same 13.5"/10.5" deep wedge as the current box** (only the width changes), ¾" MDF, one cross-brace, ≈ 69.1 L net (28.5 × 14.5 × 10.487 = 71.0 L gross − 1.66 driver − 0.3 brace); Qtc 1.02, Fc 41.7, F3 32.6 (2.49 L net per inch of outer width at the current wedge cross-section)
+- [ ] Final **ported 22 Hz** box design + cut list (after measurements), **based on **layout v3 (36" W × 16" H × 13.8"/10.8" D, front-firing, straight port)****. Earlier 27 Hz sketch, for reference: 32" W × 16" H × 18"/15" deep, slot port 1.75" × 14.5" × ~27" L-shaped, fb 27 Hz, ~90.6 L net (see box-designs.md). _Old sealed starting point, now superseded:_ 30" W × 16" H, **same 13.5"/10.5" deep wedge as the current box** (only the width changes), ¾" MDF, one cross-brace, ≈ 69.1 L net (28.5 × 14.5 × 10.487 = 71.0 L gross − 1.66 driver − 0.3 brace); Qtc 1.02, Fc 41.7, F3 32.6 (2.49 L net per inch of outer width at the current wedge cross-section)
 - [ ] **REW test matrix** (mic at the driver's head): rear seats up vs folded · pass-through closed vs open (if fitted) · sub rear-firing vs up-firing vs firing at the seatback. Johann reports that low bass drops a lot with the seats up. Likely cause: trunk pressure escaping out the body vents instead of reaching the cabin through the seatback
 - [ ] Future project (Johann): deadening under the carpet and in the doors, plus new door seals. Expect the same or slightly more deep bass (a tighter cabin gives more pressure gain below ~30 Hz) and far fewer rattles. **Re-measure in REW and re-fit the EQ afterwards**, or do the deadening before the final measurement
 - [ ] Measure the in-car response (REW / RTA) and replace the assumed cabin gain in `eq_design.py`
