@@ -12,10 +12,10 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: current** (existing box) | 36.96 L | n/a | 17" W, 13.5/10.5" D | 15% | 91/93/95/98/103 |
 |  | **Sealed: medium** | 69.1 L | n/a | 30" W, 13.5/10.5" D | ~26% | same as current (Xmax-limited) |
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
-| `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
+|  | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
 | `claude` `preferred` | **Ported 22 Hz: medium 75 L** | 75.1 L | 14 in² × 27.6" | **v3: 36" W × 16" H × 13.8/10.8" D** (v2 was 17" W, 27/24" D) | ~32% | 103/104/105/105/106 |
 |  | Ported 22 Hz: 16" wide + 1" grate (v2, superseded) | 69.9 L | 13 in² × 27.6" | 16.0" W, 27/24" D (v2) | ~29% (+ grate) | 102/103/105/105/106 |
-| `preferred` | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
+|  | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
 |  | Ported 25 Hz: half-size | 40 L | 10 in² × 29" | 16.1" W, 18/15" D | ~19% | 96/99/101/104/108 |
 | `claude` | Ported 24 Hz: big | 90.6 L | 25.4 in² × 34.8" | ~33" W, 18/15" D | ~40% | 99/105/107/107/107 |
