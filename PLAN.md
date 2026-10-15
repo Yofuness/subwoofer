@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-15 (layout v3: wide along the seatback, 75 L)_
+_Last updated: 2026-10-15 (measured: 39.5" between wells, 18" floor depth, steeper seatback → layout v4)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
@@ -20,7 +20,12 @@ Response shape is fixed with DSP (Poweramp Equalizer → LC2i Pro). Originally t
   there's little to gain.
 - EQ is cut-only. Sub makeup gain comes from the LC2i Pro bass knob (see SUBWOOFER_EQ_NOTES.md).
 
-## Layout v3 (Johann, 2026-10-15, later; current)
+## Layout v4 (measured, 2026-10-15, latest)
+- **Measured:** 39.5" between the wheel wells (forum said 38⅛"), box may be **18" deep at the floor**, seatback **steeper than 10.62°** (angle TBD).
+- Same placement as v3 (against the seatback, front-firing, 16" H, 22 Hz), but deeper and narrower. **Claude's pick: 32" W × 18" D (back at the seat angle), ~85 L, 16 in² straight floor slot ~28"** (at an assumed 20°). +~1 dB at 22–25 Hz over v3 and 4" narrower. The max-width 38.5" box (~106 L) only adds +1.6 dB more at 22 Hz. Details in box-designs.md → Layout v4.
+- Johann's 75 L choice predates these measurements; at 18" deep it would be ~29" wide but its port no longer fits straight. **Johann to choose: 75 L / 32" ~85 L / max.**
+
+## Layout v3 (Johann, 2026-10-15, later; superseded by v4)
 - The box goes **at the back of the trunk, against the seatback, very wide and shallow**, along the seatback. **75 L net @ 22 Hz kept** (14 in² × ~27.6" port, straight, no bends).
 - Height 16" and the seatback wedge (10.62°) kept. Front-firing toward the trunk lid. Proposed **36" W × 16" H × 13.8"/10.8" D** (see box-designs.md → Layout v3).
 - Critical measurement: **width between the wheel wells at the seatback** (38⅛" is an unverified forum figure).
@@ -49,8 +54,11 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [x] **Tuning chosen: 22 Hz** (2026-10-13). Starting point: ~90.6 L net, 18 in² slot, ~29" port, subsonic ~18 Hz
 - [ ] ⏸ **Don't design the final box yet.** Johann is getting trunk measurements first (his instruction, 2026-10-13)
 - [ ] **Chain low-end test:** with EQ off and AccuBASS off, play 10/15/20/25/30/40/60 Hz tones and read AC volts at the LC2i RCA output (amp off). dB = 20·log10(V/V60). Checks whether the stock head unit rolls off the deep bass. (Bluetooth SBC/AAC and the XY-BT board do not cut lows.)
-- [ ] **Re-measure the seatback wedge** (Johann will provide): seatback horizontal depth at the floor vs 16" up (gives the angle), whether it's flat or curved, and any latches or hinges in the way. All v2 designs currently use the 10.62° (3" over 16") slope from subwoofer.skp. Each +1" of lean costs ~0.5" of average depth (~2% Vb)
-- [ ] **Layout v3 fit:** measure the width between the wheel wells **right at the seatback** and up to 16" high, plus the floor depth. The box is 36" wide and 13.8" deep at the bottom
+- [ ] _(Partly answered: steeper than 10.62°, see Seatback angle above)_ **Re-measure the seatback wedge** (Johann will provide): seatback horizontal depth at the floor vs 16" up (gives the angle), whether it's flat or curved, and any latches or hinges in the way. All v2 designs currently use the 10.62° (3" over 16") slope from subwoofer.skp. Each +1" of lean costs ~0.5" of average depth (~2% Vb)
+- [x] **Wheel-well width measured: 39.5"** (Johann, 2026-10-15). Floor depth allowed: 18"
+- [ ] **Seatback angle** (now the critical number): depth from seatback to a fixed point at the floor vs at 16" up; θ = atan(Δ/16). Also: was the 39.5" at the floor or right at the seatback, and does it hold up to 16"?
+- [ ] Trunk-lid opening width (must pass the box; MTX JETTA10 at 35¾" is known to fit)
+- [ ] **Johann: pick the v4 size** (75 L ~29" W with a bent port / ~85 L 32" W straight port [Claude] / ~106 L 38.5" W)
 - [ ] Get the user's trunk measurements **+ the sub's surround height above the mounting ring** (for guard clearance) (list in SPECS.md → Trunk)
 - [ ] Final **ported 22 Hz** box design + cut list (after measurements), **based on **layout v3 (36" W × 16" H × 13.8"/10.8" D, front-firing, straight port)****. Earlier 27 Hz sketch, for reference: 32" W × 16" H × 18"/15" deep, slot port 1.75" × 14.5" × ~27" L-shaped, fb 27 Hz, ~90.6 L net (see box-designs.md). _Old sealed starting point, now superseded:_ 30" W × 16" H, **same 13.5"/10.5" deep wedge as the current box** (only the width changes), ¾" MDF, one cross-brace, ≈ 69.1 L net (28.5 × 14.5 × 10.487 = 71.0 L gross − 1.66 driver − 0.3 brace); Qtc 1.02, Fc 41.7, F3 32.6 (2.49 L net per inch of outer width at the current wedge cross-section)
 - [ ] **REW test matrix** (mic at the driver's head): rear seats up vs folded · pass-through closed vs open (if fitted) · sub rear-firing vs up-firing vs firing at the seatback. Johann reports that low bass drops a lot with the seats up. Likely cause: trunk pressure escaping out the body vents instead of reaching the cabin through the seatback

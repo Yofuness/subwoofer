@@ -13,14 +13,19 @@ live in [PLAN.md](PLAN.md); the EQ preset work lives in
 
 ### Trunk (Mk4 Jetta sedan)
 
-**Box-space limits from Johann (2026-10-15, by eye; v2, superseded by layout v3: wide along the seatback, see PLAN.md):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
+**Measured limits (Johann, 2026-10-15, later):** 39.5" between the wheel wells, 18" depth at the floor, height 16", seatback steeper than 10.62° (see table). Layout v4 in box-designs.md.
+
+**Earlier box-space limits from Johann (2026-10-15, by eye; v2, superseded by layout v3: wide along the seatback, see PLAN.md):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
 The box goes on the driver's side, with the driver firing toward the passenger side.
 
 
 | Item | Value | Source / confidence |
 |---|---|---|
 | Trunk volume | 13 ft³ (0.4 m³ ≈ 368 L) | Bentley manual p. 00-7 and spec tables. Confirmed |
-| Width between wheel wells (narrowest) | 38⅛" | VWVortex, via search snippet only. Unverified |
+| Width between wheel wells | **39.5"** | **Johann's tape measurement, 2026-10-15. Wins over the forum figure.** Exact height/position not yet stated (floor? right at the seatback?) |
+| Width between wheel wells (forum, superseded) | 38⅛" | VWVortex, via search snippet only. Unverified. 1⅜" narrower than measured, likely a different measuring point or carpet; kept for history |
+| Box depth allowed at the floor (seatback → front face) | **18"** | Johann, 2026-10-15 (current box is 13.5") |
+| Seatback slope | **steeper than the current box's 10.62°**, angle not yet measured | Johann, 2026-10-15. A box back at 10.62° would hit the seatback at the top first, so the new box needs a steeper back. Modelled at 15/20/25° until measured |
 | Height | 18½"–22⅛" | VWVortex snippet. Unverified |
 | Depth (seatback → lip) | 36" at floor / 27" at top | VWVortex snippet. Unverified |
 | Known-fit commercial box | MTX JETTA10: 21" H × 35¾" W × 11⅜" D | MTX product listing via search snippet |
@@ -28,9 +33,9 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 - The Bentley manual (`Bentley VW MKIV Manual - Complete.pdf`, 1,984 pp) has **no** interior
   trunk dimensions. It was searched in full; don't search it again for this.
 - **Still need the user's tape measurements:**
-  1. Width between the wheel wells, at the floor and at ~16" up.
+  1. ~~Width between the wheel wells~~ 39.5" (done). Still need: is that at the floor or right at the seatback, and is it the same at 16" up?
   2. Height from the floor to the underside of the rear shelf, at the seatback.
-  3. Depth from the seatback to the lip, at the floor and at ~16" up (gives the seatback angle).
+  3. Depth from the seatback to the lip, at the floor and at ~16" up (gives the seatback angle). **Most important one now:** angle = atan((depth at floor − depth at 16")/16).
   4. Trunk lid opening: narrowest width and tallest clear height.
   5. Obstructions: jack/tool kit, seat-release latches, carpet humps.
 
