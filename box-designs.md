@@ -33,6 +33,17 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 
 ## Layout v4: measured trunk, 18" deep, steeper seatback (2026-10-15, latest)
 
+### CAD model: `box_cad.py` → `cad/box_v4_38.5in.{dxf,FCStd,step}` (2026-10-15)
+
+Parametric: `python3 box_cad.py <W>` writes the DXF cut sheet; `BOX_W=<W> freecadcmd box_cad.py` also writes the FreeCAD model and STEP. It picks the largest slot (18/16/14 in²) that still fits straight with ≥ 3" at the closed end.
+- **38.5" W × 16" H × 18"/10.5" D, net 97.6 L** (gross 111.4 − port block 11.8 − driver 1.66 − brace 0.22), fb 22 Hz. This supersedes the table's 96.8 L: the real shelf and divider take slightly less volume than the earlier allowance.
+- **Construction:** front and back run full size; top and bottom sit between them; the ends are inset. Bevels are 25.1° (blade tilt) on the back panel's two long edges (parallel) and on the back edges of the top and bottom.
+- **Cut list (in):** front 38.5 × 16 · back 38.5 × 17.671 · bottom 38.5 × 16.422 (underside) · top 38.5 × 9.273 (underside) · 2 ends: trapezoid 14.5 tall, 16.070 bottom / 9.273 top · port shelf 26.25 × 11.04 · port divider 26.25 × 1.75 · brace 1.5 × ~12.2 at x = 11.25. Everything fits one 4×8 sheet with room to spare.
+- **Port:** a 1.75" × 10.29" (18.0 in²) slot on the floor against the inside of the baffle. It runs from the mouth-end wall to x = 27.1", and its open end is 10.6" from the far wall. The **mouth is a 1.75 × 10.29 hole at the bottom of the baffle at the mouth end**, so the slot's first 10.3" is a square 90° bend. Its centre-line length equals x of the open end. The bend adds a little effective length, so fb lands slightly low: measure, then shim the open end (reachable through the driver hole) to move it.
+- **Driver:** centre x = 25.14" from the mouth end, z = 9.25". The cutout (11.14") clears the shelf top by 0.43" and the top panel by 0.43". **Clock the driver so no mounting hole sits at 6 o'clock**, because a T-nut there would touch the port shelf. Terminal cup: placeholder 3 × 3" hole in the front's upper right; size it to the old cup.
+- FreeCAD check: outer 143.85 L − wood 35.28 L = 108.57 L of air, which is the hand calculation plus the 1.5 L of baffle holes. ✓
+- 34" in the same script: 16 in² × 27.8", net 85.0 L (the table's 84.3). 36": 18 in² × 30.0", 88.8 L.
+
 ### Clarified profile (Johann, 2026-10-15, later): 18" bottom / 10.5" top → 25.1°
 
 Johann's actual meaning: **the current box could have its bottom stretched to 18" (top unchanged at 10.5") and still fit**, because the body panel the box rests on is curved and leaves room low down.

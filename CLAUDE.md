@@ -14,6 +14,7 @@ presets for the in-car response. (It started out as a sealed design; see PLAN.md
 - `Bentley VW MKIV Manual - Complete.pdf`: 1,984 pp, already searched. It has no trunk interior dimensions. **Proprietary: git-ignored, never commit it**
 - `max_spl.py`: max clean SPL (Xmax / 185 W-limited) for sealed vs vented boxes; import `max_spl()` for comparisons
 - `box_compare.html`: interactive comparison page (max SPL, 1 W response, excursion @ 185 W, port speed, port length). It's the same model as `max_spl.py` ported to JS; keep the two in sync. Add new candidate boxes to `DEFAULTS` in it
+- `box_cad.py`: parametric v4 box (width as the argument): net volume, port length, DXF cut sheet in `cad/`; run under `freecadcmd` for the .FCStd/.step 3D model
 - `eq_design.py`: models box + cabin and fits cut-only biquads, then exports the Poweramp JSON
 
 ## Keeping docs current (do this every session)
