@@ -4,7 +4,7 @@ Candidate enclosures and their modelled performance. Driver, amp, trunk and exis
 live in [SPECS.md](SPECS.md); decisions and status live in [PLAN.md](PLAN.md). Compare any of these
 interactively in [box_compare.html](box_compare.html) (keep its `DEFAULTS` in sync with this file).
 
-**Update (2026-10-15, measured):** 39.5" between the wells, 18" floor depth, seatback steeper than 10.62°. See **Layout v4** below: the extra depth makes a 32"-wide, ~85 L box with a straight port the sweet spot (seat angle still to be measured).
+**Update (2026-10-15, measured):** 39.5" between the wells; the box profile can be **18" deep at the floor, 10.5" at the top (25.1° straight back; the seat is curved)**. See **Layout v4** below: the sweet spot is now **34" W, ~84 L, 16 in² straight floor slot**.
 
 **Current direction (2026-10-15, later):** ported, **tuned to 22 Hz, 75 L net**, built as **layout v3**: wide and shallow along the seatback, front-firing toward the trunk lid. Layout v2 (side-firing) is superseded. Size settled at **75 L** (Johann, 2026-10-15). The list has 3 sealed + 2 main ported options (22 Hz), plus 4 earlier ported candidates for comparison.
 Final dimensions wait on Johann's trunk measurements.
@@ -16,8 +16,8 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
 |  | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
 | `preferred` | **Ported 22 Hz: medium 75 L** | 75.1 L | 14 in² × 27.6" | **v3: 36" W × 16" H × 13.8/10.8" D** (v2 was 17" W, 27/24" D) | ~32% | 103/104/105/105/106 |
-| `claude` | **Ported 22 Hz: v4 32" wide** (20° seat assumed) | 84.6 L | 16 in² × 27.9" | 32" W × 16" H × 18"/12.2" D | ~34% | 103/105/106/105/106 |
-|  | Ported 22 Hz: v4 max width (20° seat assumed) | 105.6 L | 18 in² × 24.9" | 38.5" W × 16" H × 18"/12.2" D | ~41% | 103/106/107/105/106 |
+| `claude` | **Ported 22 Hz: v4 34" wide** | 84.3 L | 16 in² × 28.0" | 34" W × 16" H × 18"/10.5" D | ~35% | 103/105/106/105/106 |
+|  | Ported 22 Hz: v4 max width | 96.8 L | 18 in² × 27.3" | 38.5" W × 16" H × 18"/10.5" D | ~39% | 103/106/107/105/106 |
 |  | Ported 22 Hz: 16" wide + 1" grate (v2, superseded) | 69.9 L | 13 in² × 27.6" | 16.0" W, 27/24" D (v2) | ~29% (+ grate) | 102/103/105/105/106 |
 |  | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
@@ -32,6 +32,26 @@ Tags: `claude` = Claude's recommendation, `preferred` = Johann's preference (22 
 Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabin gain.
 
 ## Layout v4: measured trunk, 18" deep, steeper seatback (2026-10-15, latest)
+
+### Clarified profile (Johann, 2026-10-15, later): 18" bottom / 10.5" top → 25.1°
+
+Johann's actual meaning: **the current box could have its bottom stretched to 18" (top unchanged at 10.5") and still fit**, because the body panel the box rests on is curved and leaves room low down.
+A straight back from 18" at the floor to 10.5" at 16" up is atan(7.5/16) = **25.1°**. That's the 25° row below, not the 20° placeholder. Inner average depth 12.67", **3.01 L per inch of outer width**.
+
+| Outer W | Port | Net Vb | Port L | Closed-end slack (inner W − L) | Port v | Outer vol / trunk | Max SPL 20/22/25/30/40 |
+|---|---|---|---|---|---|---|---|
+| 30.8" | 14 in² | 76.3 L | 27.2" | 2.1" (tight) | 15.5 m/s | 115 L / 31% | 102.8/103.9/105.5/104.8/106.3 |
+| 32" | 14 in² | 80.4 L | 25.7" | 4.8" | 15.9 | 120 L / 32% | 102.9/104.3/105.9/104.8/106.3 |
+| 32" | 16 in² | 77.1 L | 30.8" | −0.3" ✗ | 13.7 | 120 L / 32% | 102.9/104.0/105.6/104.8/106.3 |
+| **34"** | **16 in² (1.75" × 9.1")** | **84.3 L** | **28.0"** | **4.5"** | **14.5** | **127 L / 35%** | **102.9/104.6/106.2/104.8/106.3** |
+| 36" | 16 in² | 91.2 L | 25.8" | 8.7" | 15.2 | 135 L / 37% | 102.9/105.2/106.8/104.8/106.3 |
+| 38.5" | 18 in² | 96.8 L | 27.3" | 9.7" | 14.2 | 144 L / 39% | 102.9/105.7/106.9/104.8/106.3 |
+
+- **Claude's pick: 34" W × 16" H × 18"/10.5" D, 84.3 L, 16 in² × 28" straight floor slot, fb 22 Hz.** It's the same ~84 L the 20° guess gave at 32", but 2" wider because the back leans more. There's 2.75" per side against the 39.5".
+- vs v3 (75 L, 36" × 13.8/10.8): +0.8 dB at 22 Hz, +0.7 dB at 25 Hz, and 2" narrower. The 38.5" max box adds another +1.1/+0.7 dB.
+- ⚠ **Curve check:** a flat back is the straight chord from (18", floor) to (10.5", 16" up); at 8" up it sits 14.25" from the front face. If the seat **bulges** toward the trunk at mid-height, it would hit there; if it's **concave** (more room low down), a two-facet back could add a few litres. **Measure:** the free depth at 8" up (needs ≥ 14.25").
+- The angle-sweep tables below (20° placeholder) are kept for history.
+
 
 **New measurements (Johann):** 39.5" between the wheel wells (the forum said 38⅛"), the box may be **18" deep at the floor** (the current box is 13.5"), and the **seatback leans more than the current box's 10.62°** (angle not measured yet).
 

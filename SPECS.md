@@ -13,7 +13,7 @@ live in [PLAN.md](PLAN.md); the EQ preset work lives in
 
 ### Trunk (Mk4 Jetta sedan)
 
-**Measured limits (Johann, 2026-10-15, later):** 39.5" between the wheel wells, 18" depth at the floor, height 16", seatback steeper than 10.62° (see table). Layout v4 in box-designs.md.
+**Measured limits (Johann, 2026-10-15, later):** 39.5" between the wheel wells, current box profile stretched to 18" at the floor / 10.5" at the top (25.1° straight back), height 16" (see table). Layout v4 in box-designs.md.
 
 **Earlier box-space limits from Johann (2026-10-15, by eye; v2, superseded by layout v3: wide along the seatback, see PLAN.md):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
 The box goes on the driver's side, with the driver firing toward the passenger side.
@@ -25,7 +25,7 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 | Width between wheel wells | **39.5"** | **Johann's tape measurement, 2026-10-15. Wins over the forum figure.** Exact height/position not yet stated (floor? right at the seatback?) |
 | Width between wheel wells (forum, superseded) | 38⅛" | VWVortex, via search snippet only. Unverified. 1⅜" narrower than measured, likely a different measuring point or carpet; kept for history |
 | Box depth allowed at the floor (seatback → front face) | **18"** | Johann, 2026-10-15 (current box is 13.5") |
-| Seatback slope | **steeper than the current box's 10.62°**, angle not yet measured | Johann, 2026-10-15. A box back at 10.62° would hit the seatback at the top first, so the new box needs a steeper back. Modelled at 15/20/25° until measured |
+| Seatback profile | **The current box could keep its 10.5" top (at 16") and grow to 18" at the floor and still fit.** The seat/body panel it rests against is **curved**, so there's extra room low down. Straight-back chord: atan((18 − 10.5)/16) = **25.1°** | Johann, 2026-10-15 (clarified). Wins over the earlier "steeper than 10.62°, angle unknown" (the 20° placeholder in v4 is superseded). Unverified: whether the curve bulges past the chord at mid-height; chord depth at 8" up = 14.25" outer |
 | Height | 18½"–22⅛" | VWVortex snippet. Unverified |
 | Depth (seatback → lip) | 36" at floor / 27" at top | VWVortex snippet. Unverified |
 | Known-fit commercial box | MTX JETTA10: 21" H × 35¾" W × 11⅜" D | MTX product listing via search snippet |
