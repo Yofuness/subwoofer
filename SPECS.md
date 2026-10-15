@@ -13,6 +13,10 @@ live in [PLAN.md](PLAN.md); the EQ preset work lives in
 
 ### Trunk (Mk4 Jetta sedan)
 
+**Box-space limits from Johann (2026-10-15, by eye, not tape-measured):** max height 16" (= the current box), max depth seatback→lid 27" (= 2× the current 13.5").
+The box goes on the driver's side, with the driver firing toward the passenger side.
+
+
 | Item | Value | Source / confidence |
 |---|---|---|
 | Trunk volume | 13 ft³ (0.4 m³ ≈ 368 L) | Bentley manual p. 00-7 and spec tables. Confirmed |

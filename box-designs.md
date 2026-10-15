@@ -4,7 +4,7 @@ Candidate enclosures and their modelled performance. Driver, amp, trunk and exis
 live in [SPECS.md](SPECS.md); decisions and status live in [PLAN.md](PLAN.md). Compare any of these
 interactively in [box_compare.html](box_compare.html) (keep its `DEFAULTS` in sync with this file).
 
-**Current direction (2026-10-13):** ported, **tuned to 22 Hz**. Still to decide: **big (90.6 L) vs compact (45 L)**. The list has 3 sealed + 2 main ported options (22 Hz), plus 4 earlier ported candidates for comparison.
+**Current direction (2026-10-15):** ported, **tuned to 22 Hz**, built as **layout v2** (side-firing, 16" H × 27"/24" deep; see below). Still to decide: **big (90.6 L) vs compact (45 L)**. The list has 3 sealed + 2 main ported options (22 Hz), plus 4 earlier ported candidates for comparison.
 Final dimensions wait on Johann's trunk measurements.
 
 | Tags | Option | Net Vb | Port | Outer (16" H) | Trunk use | Max SPL 20/22/25/30/40 Hz |
@@ -12,8 +12,8 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: current** (existing box) | 36.96 L | n/a | 17" W, 13.5/10.5" D | 15% | 91/93/95/98/103 |
 |  | **Sealed: medium** | 69.1 L | n/a | 30" W, 13.5/10.5" D | ~26% | same as current (Xmax-limited) |
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
-| `claude` `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 17.9" W, 18/15" D | ~21% | 99/100/102/105/106 |
-| `preferred` | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 31.4" W, 18/15" D | ~40% | 103/105/107/105/106 |
+| `claude` `preferred` | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
+| `preferred` | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
 |  | Ported 25 Hz: half-size | 40 L | 10 in² × 29" | 16.1" W, 18/15" D | ~19% | 96/99/101/104/108 |
 | `claude` | Ported 24 Hz: big | 90.6 L | 25.4 in² × 34.8" | ~33" W, 18/15" D | ~40% | 99/105/107/107/107 |
@@ -24,6 +24,32 @@ The four rows below the two 22 Hz designs are earlier candidates, restored to th
 Tags: `claude` = Claude's recommendation, `preferred` = Johann's preference (22 Hz chosen; size undecided). Keep these in sync with box_compare.html.
 
 Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabin gain.
+
+## Layout v2: side-firing, driver's side of the trunk (2026-10-15)
+
+Constraints from Johann (judged by eye, not tape-measured): height ≤ 16" (current box), depth seatback→lid ≤ 2 × 13.5" = **27"** at the bottom.
+The back keeps the 10.62° seatback slope, so the top is **24"** deep. The box sits on the **driver's side**, and the **driver is on the passenger-side panel**, firing across the trunk.
+
+Inner cross-section (the side profile): 14.5" tall × 23.99" average depth = 347.8 in², which works out to **5.70 L per inch of inner width**.
+
+| | Compact 45 L @ 22 Hz | Big 90.6 L @ 22 Hz |
+|---|---|---|
+| Port | 10 in² × ~33.4" | 18 in² × ~29.3" |
+| Port air + port wall | 5.5 + ~6.0 L | 8.6 + ~5.2 L |
+| Gross internal | 58.4 L | 106.4 L |
+| **Outer W × H × D** | **11.7" × 16" × 27"/24"** | **20.2" × 16" × 27"/24"** |
+| Outer volume / trunk share | 79 L / ~21% | 135 L / ~37% |
+| Performance | unchanged (same Vb, fb): see tables below | unchanged |
+
+Layout notes:
+- **Driver on the passenger-side panel** (27"/24" × 16"): the 12.5" frame fits with ~1.75" top/bottom margin. Magnet depth 5.31" + 0.75" panel
+  leaves ~4" behind the magnet in the compact box (10.2" inner width), so there's room for the port to run along the far (driver-side) inner wall.
+- **The port won't fit straight:** 29–33" is longer than the ~24" inner depth, so it needs **one bend** (an L running along the inner driver-side wall, then along the bottom or the seatback).
+  The port mouth most likely goes on the rear (trunk-lid) face or the passenger face. Pick whichever the guard covers more easily. Slot shape is TBD
+  (a 10 in² full-height slot would be only 0.69" wide, which is too narrow, so the compact box probably wants something like a 1.25" × 8" slot).
+- The guard now covers the passenger-side face (plus the port mouth if it's on another face).
+- ⚠ **Wheel well:** a 27"-deep box on the driver's side is likely to run into the wheel well. It has to sit inboard of the well, or be notched around it. **Needs measuring.**
+- Supersedes the earlier 18"/15"-deep, front-firing geometry (31.4" / 17.9" wide).
 
 ## Compact 22 Hz option (2026-10-13)
 
