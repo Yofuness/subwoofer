@@ -30,7 +30,7 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 ## Layout v2: side-firing, driver's side of the trunk (2026-10-15)
 
 Constraints from Johann (judged by eye, not tape-measured): height ≤ 16" (current box), depth seatback→lid ≤ 2 × 13.5" = **27"** at the bottom.
-The back keeps the 10.62° seatback slope, so the top is **24"** deep. The box sits on the **driver's side**, and the **driver is on the passenger-side panel**, firing across the trunk.
+The back keeps the 10.62° seatback slope (the **wedge is required by the rear seats**; angle from subwoofer.skp, to be re-measured), so the top is **24"** deep. The box sits on the **driver's side**, and the **driver is on the passenger-side panel**, firing across the trunk.
 
 Inner cross-section (the side profile): 14.5" tall × 23.99" average depth = 347.8 in², which works out to **5.70 L per inch of inner width**.
 
