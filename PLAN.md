@@ -66,7 +66,7 @@ In the 22 Hz box, the GM-3500T's 185 W is **not** the bottleneck. Power to reach
 a built-in adjustable subsonic filter (the GM-3500T has none), class-D efficiency, or a future bigger or second sub.
 
 ## Design requirements (from Johann)
-- **Removable guard** over the front face (2026-10-13), because cargo sometimes sits against the box. Plan: a ~1.5"-deep frame (MDF or pine
+- ~~**Removable guard** over the front face (2026-10-13)~~ **Dropped (2026-10-15):** Johann will buy a **generic 12" sub grille** (Amazon) instead. Check that it gives ≥ ~1.15" of clearance from the mounting ring to the inside of the mesh (use spacers if not). The **port mouth is not covered**: keep cargo ~2"+ away, or add a cheap perforated strip/dowels over it. A top-firing port was ruled out (only ~2.5–6" to the parcel shelf). Original guard plan:, because cargo sometimes sits against the box. Plan: a ~1.5"-deep frame (MDF or pine
   offcuts) with perforated/expanded steel (≥ 50% open, 16–20 ga), a centre cross-bar, held on by 4–6 neodymium magnets (~10+ lb each),
   with the mesh glued in and foam tape at contact points (rattles at 22 Hz). **It must cover the port too**, or the port must exit where cargo can't
   block it. Openings in front of the port should total well over the port area (18 in²). Adds ~1.5" to overall depth. ≈ $30–50.

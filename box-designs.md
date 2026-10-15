@@ -48,7 +48,7 @@ Gross needed = 75.1 + 1.66 driver + 0.3 brace + 6.3 port air + ~4.9 port wall = 
 - **Port:** 27.6" fits straight along the width (inner 34.5"), so **no bends**. Concept: a low slot along the floor (e.g. 1.75" tall × 8" deep = 14 in²) running across the box,
   with its mouth on the front face at one end and the driver toward the other end, raised slightly (centre ~8.75") to clear the port shelf. A shelf wall uses ~2.7 L instead of
   the ~4.9 L assumed, so there's ~2 L of margin to trim back at final design. Final geometry comes after measurements.
-- **Guard:** goes on the front (trunk-lid) face, covering the driver and the port mouth. It adds depth toward the trunk lid, not width.
+- **Grille:** a generic 12" sub grille over the driver (Johann, 2026-10-15). It needs ≥ ~1.15" of clearance (spacers if needed). The port mouth stays open on the front face: keep cargo clear, or add a perforated strip.
 - **Floor left over:** about 36" − 13.8" − guard ≈ 20" of clear floor depth in front of the box (if the floor is ~36", unverified).
 - **Measure:** width between the wheel wells **right at the seatback** (they may intrude there), and the seatback angle. If the seat is wider above the wells,
   a stepped box could reach over them (only if needed).
