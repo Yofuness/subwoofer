@@ -29,13 +29,18 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 | Height | 18½"–22⅛" | VWVortex snippet. Unverified |
 | Depth (seatback → lip) | 36" at floor / 27" at top | VWVortex snippet. Unverified |
 | Known-fit commercial box | MTX JETTA10: 21" H × 35¾" W × 11⅜" D | MTX product listing via search snippet |
+| Trunk space (sedan) | 38" W × 20" H × 36"/27" D | Crutchfield 1999–2005 Jetta guide (search summary, 2026-10-15). Unverified; matches the VWVortex figures, so possibly the same source |
+| Trunk **lid** outer width | 43.5" edge to edge | TDIClub, one owner, '99.5 Mk4 Jetta. Unverified. This is the outer lid skin; the **opening** is narrower by the seal flange/gutter on each side (not measured anywhere found) |
+| Trunk **opening** width | **unknown** | No Mk4 sedan figure found (searched 2026-10-15). Only lower bound: the MTX JETTA10 (35¾" W, Mk4-specific) gets in |
+| Largest box documented in a Mk4 sedan trunk | MTX JETTA10, 35¾" W | Search 2026-10-15 found no forum build with a stated larger width. Forum lore: "10s fit fine, 12s and up start to become an issue" (VWVortex, about driver depth/clearance, not box width) |
+| Lid hinges | Gas struts + conventional hinge, **not** gooseneck | Johann, 2026-10-15. Wins over Claude's earlier guess (gooseneck, from memory, wrong) |
 
 - The Bentley manual (`Bentley VW MKIV Manual - Complete.pdf`, 1,984 pp) has **no** interior
   trunk dimensions. It was searched in full; don't search it again for this.
 - **Still need the user's tape measurements (revised 2026-10-15 for the max-width v4 box):**
   1. **Trunk-lid opening, narrowest width** (often at the bottom lip near the latch, or at the top corners by the taillights/hinges). This gates the box width (box ≤ opening − ~½"), since a 38.5 × 18" box (42.5" diagonal) can't be turned inside the 39.5" well gap. Also the clear height at that spot (needs ≳ 17" to pass the box upright).
   2. **Well gap at the seatback at 3 heights: ~1", 8", 15" off the floor** (the 39.5" location was never stated). The box has to clear the narrowest one.
-  3. **Lid hinges (likely the deal-breaker):** close the lid gently and check whether the hinge arms swing down into the space where the box's top outer corners would be (against the seatback, 16" up, ~19" out from the centreline). Measure the clearance, or the narrowest gap between the two hinge arms at 16" up. _Mk4 sedans are believed to use gooseneck hinges that intrude into the trunk (from memory, unverified)._
+  3. ~~Lid hinges~~ Not gooseneck (struts + conventional hinge, Johann). Only a quick look is needed: the hinges should stay up near the shelf (≥ 18½"), above the 16" box.
   4. **Floor flatness** over the 18" × 38.5" footprint at the seatback: any humps, tie-downs, or a rise toward the seat.
   5. Sub surround height above the mounting ring (grille clearance, see PLAN.md).
   - ~~Rear-shelf height / seatback angle~~ Done: 16" H with the 18"/10.5" profile (2026-10-15).
