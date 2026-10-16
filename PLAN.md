@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-15 (layout v4: pick revised to max width, 38.5" W ~97 L, depending on the lid opening)_
+_Last updated: 2026-10-15 (cardboard test: FINAL 34" W × 15.5" H, 82.1 L; installs through the rear seats)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
@@ -19,6 +19,11 @@ Response shape is fixed with DSP (Poweramp Equalizer → LC2i Pro). Originally t
 - _(Superseded)_ Target ≈ 60–70 L net, keeping the 16"-tall seatback wedge** (10.6° slope). Beyond ~70 L
   there's little to gain.
 - EQ is cut-only. Sub makeup gain comes from the LC2i Pro bass knob (see SUBWOOFER_EQ_NOTES.md).
+
+## FINAL size (cardboard dummy, 2026-10-15)
+- **34" W × 15.5" H × 18"/10.73" D, net 82.1 L, 16 in² × 28.8" floor slot, fb 22 Hz.** Cut list in box-designs.md → FINAL size. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`.
+- Why: the 34" dummy wouldn't pass the trunk lid. It went in through the rear seats and turned flat in the trunk, but at 16" tall it barely cleared the pass-through (with cardboard flex). MDF won't flex, so −½".
+- 15.5" is also the lowest height that works without redesign: the driver cutout clears the shelf and top by 0.18" each.
 
 ## Layout v4 (measured, 2026-10-15, latest)
 - **Measured:** 39.5" between the wheel wells (forum said 38⅛"). **Profile (clarified): the current box's 10.5" top can stay, with the bottom stretched to 18"** (the body panel is curved). Straight back = 25.1°.
@@ -58,13 +63,13 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [x] **Wheel-well width measured: 39.5"** (Johann, 2026-10-15). Floor depth allowed: 18"
 - [x] **Seatback profile:** current box with the bottom stretched to 18" (top 10.5") fits; the panel is curved → 25.1° straight back (Johann, 2026-10-15)
 - [x] **Curve check:** the panel curves away from the box (concave), so the flat 25.1° back clears it (Johann, 2026-10-15). Flat back kept; a two-facet back would gain ~+0.2 dB, not worth it
-- [ ] Was the 39.5" measured at the floor or right at the seatback? Measure the well gap at ~1", 8" and 15" up, at the seatback
+- [x] ~~Was the 39.5" measured at the floor or right at the seatback?~~ Moot: the 34" dummy fit and turned between the wells. Measure the well gap at ~1", 8" and 15" up, at the seatback
 - [x] ~~Lid-hinge clearance~~ Not gooseneck: struts + conventional hinge (Johann, 2026-10-15). Not a width limit
-- [ ] **Install route check (2026-10-15):** Johann's fallback is to pass the box through the folded rear seats and rotate it in the trunk. **Rotating it flat in the trunk can't work:** a 38.5 × 18" footprint needs 42.5" of room in *both* directions partway through the turn (at 25°: 38.5·cos25 + 18·sin25 = 42.5" wide, 38.5·sin25 + 18·cos25 = 32.6" deep; mirrored at 65°), and the trunk is 36" deep (forum). The seat route works only if the box can keep its tail in the pass-through while it turns, so it depends on the pass-through width. A better fallback goes through the lid: lower one end under the side lip (the trunk is wider behind the wells than the opening), drop the other end, slide it forward. Best test: a cardboard or 2×2 dummy at 38.5 × 16 × 18 (back slope optional) tried both ways.
-- [ ] **Trunk-lid opening width: this now gates the box width.** No forum figure exists; the largest proven fit is the MTX JETTA10 at 35¾". So ≤ ~35" is safe blind; 36–38.5" needs this measurement (or a 38.5" stick test). A 38.5" box must pass through flat; it can't be rotated inside, since its 42.5" plan diagonal is longer than the 39.5" between the wells. The MTX JETTA10 at 35¾" is known to fit
-- [ ] **v4 size: max width (~38.5", ~97 L)**, final number = min(well gap − ~1", lid opening − ~½") once the two measurements above are in
+- [x] **Install route check (done with the dummy, 2026-10-15):** the lid is too narrow for 34"; the box goes in through the rear seats and turns flat in the trunk. Original note: Johann's fallback is to pass the box through the folded rear seats and rotate it in the trunk. **Rotating it flat in the trunk can't work:** a 38.5 × 18" footprint needs 42.5" of room in *both* directions partway through the turn (at 25°: 38.5·cos25 + 18·sin25 = 42.5" wide, 38.5·sin25 + 18·cos25 = 32.6" deep; mirrored at 65°), and the trunk is 36" deep (forum). The seat route works only if the box can keep its tail in the pass-through while it turns, so it depends on the pass-through width. A better fallback goes through the lid: lower one end under the side lip (the trunk is wider behind the wells than the opening), drop the other end, slide it forward. Best test: a cardboard or 2×2 dummy at 38.5 × 16 × 18 (back slope optional) tried both ways.
+- [x] **Trunk-lid opening width:** < 34" (the dummy didn't fit). Moot now that the box goes through the seats. Original note: No forum figure exists; the largest proven fit is the MTX JETTA10 at 35¾". So ≤ ~35" is safe blind; 36–38.5" needs this measurement (or a 38.5" stick test). A 38.5" box must pass through flat; it can't be rotated inside, since its 42.5" plan diagonal is longer than the 39.5" between the wells. The MTX JETTA10 at 35¾" is known to fit
+- [x] **Size: FINAL 34" W × 15.5" H, 82.1 L** (cardboard dummy, 2026-10-15). ~~v4 size: max width (~38.5", ~97 L)~~, final number = min(well gap − ~1", lid opening − ~½") once the two measurements above are in
 - [ ] Get the user's trunk measurements **+ the sub's surround height above the mounting ring** (for guard clearance) (list in SPECS.md → Trunk)
-- [x] **CAD + cut list drafted at 38.5" (2026-10-15):** `box_cad.py` → `cad/box_v4_38.5in.dxf` (cut sheet, mm), `.FCStd`, `.step`. Net 97.6 L, 18 in² × 27.1" slot. Re-run with the final width after the cardboard dummy test
+- [x] **CAD + cut list: FINAL `cad/box_v4_34x15.5in.*`** (2026-10-15). First drafted at 38.5": `box_cad.py` → `cad/box_v4_38.5in.dxf` (cut sheet, mm), `.FCStd`, `.step`. Net 97.6 L, 18 in² × 27.1" slot. Re-run with the final width after the cardboard dummy test
 - [ ] Final **ported 22 Hz** box design + cut list (after measurements), **based on **layout v4 (~38.5" W × 16" H × 18"/10.5" D, 25.1° back, front-firing, 18 in² straight floor slot)**. Earlier 27 Hz sketch, for reference: 32" W × 16" H × 18"/15" deep, slot port 1.75" × 14.5" × ~27" L-shaped, fb 27 Hz, ~90.6 L net (see box-designs.md). _Old sealed starting point, now superseded:_ 30" W × 16" H, **same 13.5"/10.5" deep wedge as the current box** (only the width changes), ¾" MDF, one cross-brace, ≈ 69.1 L net (28.5 × 14.5 × 10.487 = 71.0 L gross − 1.66 driver − 0.3 brace); Qtc 1.02, Fc 41.7, F3 32.6 (2.49 L net per inch of outer width at the current wedge cross-section)
 - [ ] **REW test matrix** (mic at the driver's head): rear seats up vs folded · pass-through closed vs open (if fitted) · sub rear-firing vs up-firing vs firing at the seatback. Johann reports that low bass drops a lot with the seats up. Likely cause: trunk pressure escaping out the body vents instead of reaching the cabin through the seatback
 - [ ] Future project (Johann): deadening under the carpet and in the doors, plus new door seals. Expect the same or slightly more deep bass (a tighter cabin gives more pressure gain below ~30 Hz) and far fewer rattles. **Re-measure in REW and re-fit the EQ afterwards**, or do the deadening before the final measurement

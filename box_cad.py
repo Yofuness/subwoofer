@@ -2,7 +2,8 @@
 """Layout v4 ported box (22 Hz): geometry, net volume, port length, DXF cut sheet.
 
     python3 box_cad.py [width_in]                 -> prints dims, writes cad/box_v4_<W>in.dxf
-    freecadcmd box_cad.py  (env BOX_W=38.5)       -> also writes cad/box_v4_<W>in.FCStd + .step
+    python3 box_cad.py <width_in> <height_in>     -> other height (back keeps the seatback's 25.1 deg slope)
+    freecadcmd box_cad.py  (env BOX_W=34 BOX_H=15.5) -> also writes cad/box_v4_<W>x<H>in.FCStd + .step
 
 Coordinates (inches): x = width (x=0 is the port-mouth end, left when you face the driver),
 y = depth from the front face toward the seatback, z = up. 3/4" MDF everywhere.
@@ -13,18 +14,21 @@ import math, os, sys
 
 # ---------------------------------------------------------------- parameters
 T = 0.75                        # MDF thickness
-H, D_BOT, D_TOP = 16.0, 18.0, 10.5
+SLOPE = 7.5 / 16                 # seatback: 18" deep at the floor, 10.5" at 16" up (25.1 deg)
+H = float(os.environ.get('BOX_H') or (sys.argv[2] if len(sys.argv) > 2 else 16.0))
+D_BOT = 18.0
+D_TOP = D_BOT - H * SLOPE
 CH, CW = 1.75, 10.25            # port slot: height x depth (y), 17.94 in^2
 FB = 22.0                       # tuning
 DRV_CUT, DRV_OD = 11.14, 12.4   # TS-W304R baffle cutout / frame OD
 DRV_DISP_L = 1.66
-DRV_Z = 9.25                    # driver centre height (outer); 0.43" clear of shelf and top
+DRV_Z = (T + CH + T + H - T) / 2  # driver centre height: middle of the gap between port shelf and top
 BRACE_X, BRACE_Z, BRACE_H = 11.25, 8.25, 1.5   # 3/4" brace, front->back
 TERM = (3.0, 3.0)               # terminal-cup hole placeholder, measure the old cup
 C = 343.0
 IN3_L = 0.016387064
 
-TAN = (D_BOT - D_TOP) / H
+TAN = SLOPE
 TH = math.atan(TAN)
 DT = T / math.cos(TH)           # horizontal thickness of the sloped back
 
@@ -202,9 +206,12 @@ def main():
     else:
         print('WARNING: even a 14 in^2 port does not fit straight at this width')
     here = os.path.dirname(os.path.abspath(__file__)); os.makedirs(os.path.join(here, 'cad'), exist_ok=True)
-    stem = os.path.join(here, 'cad', f'box_v4_{W:g}in')
+    stem = os.path.join(here, 'cad', f'box_v4_{W:g}in' if H == 16 else f'box_v4_{W:g}x{H:g}in')
     print(f"W {W}\"  gross {d['gross_L']:.1f} L  net {d['net_L']:.1f} L  port {d['area']:.2f} in2 x {d['port_L']:.2f}\" "
           f"(open end {d['slack']:.1f}\" from far wall)  driver centre x {d['drv_x']:.2f}\"")
+    gap = (H - T) - (T + CH + T) - DRV_CUT
+    print(f'  H {H}" (top depth {D_TOP:.2f}"), driver centre z {DRV_Z:.2f}", cutout clearance {gap/2:.2f}" above shelf and below top'
+          + ('' if gap > 0 else '  ** DRIVER CUTOUT DOES NOT FIT **'))
     for name, qty, poly, bevel, holes, note in panels(d):
         print(f'  {qty} x {name:13s} {note}')
     write_dxf(d, stem + '.dxf'); print('wrote', stem + '.dxf')

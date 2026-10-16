@@ -31,7 +31,9 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 | Known-fit commercial box | MTX JETTA10: 21" H × 35¾" W × 11⅜" D | MTX product listing via search snippet |
 | Trunk space (sedan) | 38" W × 20" H × 36"/27" D | Crutchfield 1999–2005 Jetta guide (search summary, 2026-10-15). Unverified; matches the VWVortex figures, so possibly the same source |
 | Trunk **lid** outer width | 43.5" edge to edge | TDIClub, one owner, '99.5 Mk4 Jetta. Unverified. This is the outer lid skin; the **opening** is narrower by the seal flange/gutter on each side (not measured anywhere found) |
-| Trunk **opening** width | **unknown** | No Mk4 sedan figure found (searched 2026-10-15). Only lower bound: the MTX JETTA10 (35¾" W, Mk4-specific) gets in |
+| Trunk **opening** width | **< 34"** (narrower than the 34" dummy) | Johann's cardboard test, 2026-10-15: the 34" dummy would not go through the lid. **The box has to go in and out through the rear seat pass-through** |
+| Rear-seat pass-through: height limit | **≈ 15.5" box height** | Johann's cardboard test, 2026-10-15: the 16"-tall dummy *barely* fit, likely helped by the cardboard flexing. Johann: needs to be ½" shorter. MDF won't flex, so treat 15.5" as a maximum, not a target with margin |
+| Rotating the box flat in the trunk | **Works at 34" W** (dummy, 2026-10-15) | Footprint diagonal √(34² + 18²) = 38.5" < 39.5" between the wells. Width ceiling for the turn ≈ √(39.5² − 18²) = 35.2" with no margin |
 | Largest box documented in a Mk4 sedan trunk | MTX JETTA10, 35¾" W | Search 2026-10-15 found no forum build with a stated larger width. Forum lore: "10s fit fine, 12s and up start to become an issue" (VWVortex, about driver depth/clearance, not box width) |
 | Lid hinges | Gas struts + conventional hinge, **not** gooseneck | Johann, 2026-10-15. Wins over Claude's earlier guess (gooseneck, from memory, wrong) |
 

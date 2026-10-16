@@ -4,7 +4,7 @@ Candidate enclosures and their modelled performance. Driver, amp, trunk and exis
 live in [SPECS.md](SPECS.md); decisions and status live in [PLAN.md](PLAN.md). Compare any of these
 interactively in [box_compare.html](box_compare.html) (keep its `DEFAULTS` in sync with this file).
 
-**Update (2026-10-15, measured):** 39.5" between the wells; the box profile can be **18" deep at the floor, 10.5" at the top (25.1° straight back; the seat is curved)**. See **Layout v4** below: Claude's pick is now **as wide as fits: 38.5" W, ~97 L, 18 in² straight floor slot** (the 2.75"/side gaps beside a 34" box are dead space; Johann, 2026-10-15). The final width depends on the lid opening and where the 39.5" was measured.
+**Update (2026-10-15, measured):** 39.5" between the wells; the box profile can be **18" deep at the floor, 10.5" at the top (25.1° straight back; the seat is curved)**. See **Layout v4** below: **Final (cardboard test): 34" W × 15.5" H, 82.1 L, 16 in² slot**; see "FINAL size" below. Earlier: Claude's pick was **as wide as fits: 38.5" W, ~97 L, 18 in² straight floor slot** (the 2.75"/side gaps beside a 34" box are dead space; Johann, 2026-10-15). The final width depends on the lid opening and where the 39.5" was measured.
 
 **Current direction (2026-10-15, later):** ported, **tuned to 22 Hz, 75 L net**, built as **layout v3**: wide and shallow along the seatback, front-firing toward the trunk lid. Layout v2 (side-firing) is superseded. Size settled at **75 L** (Johann, 2026-10-15). The list has 3 sealed + 2 main ported options (22 Hz), plus 4 earlier ported candidates for comparison.
 Final dimensions wait on Johann's trunk measurements.
@@ -16,8 +16,8 @@ Final dimensions wait on Johann's trunk measurements.
 |  | **Sealed: large** | 100 L | n/a | ~42.4" W at 13.5/10.5" D (too wide for the 38⅛" between the wells, so it would need to be deeper) | ~36% | same as current (Xmax-limited) |
 |  | **Ported 22 Hz: compact** | 45 L | 10 in² × 33.4" | 11.7" W, 27/24" D (v2) | ~21% | 99/100/102/105/106 |
 | `preferred` | **Ported 22 Hz: medium 75 L** | 75.1 L | 14 in² × 27.6" | **v3: 36" W × 16" H × 13.8/10.8" D** (v2 was 17" W, 27/24" D) | ~32% | 103/104/105/105/106 |
-| | Ported 22 Hz: v4 34" wide | 84.3 L | 16 in² × 28.0" | 34" W × 16" H × 18"/10.5" D | ~35% | 103/105/106/105/106 |
-| `claude` | **Ported 22 Hz: v4 max width** | 96.8 L | 18 in² × 27.3" | 38.5" W × 16" H × 18"/10.5" D | ~39% | 103/106/107/105/106 |
+| `claude` `preferred` | **Ported 22 Hz: v4 FINAL 34" × 15.5"** (was 84.3 L at 16" tall) | 82.1 L | 16 in² × 28.0" | 34" W × 16" H × 18"/10.5" D | ~35% | 103/105/106/105/106 |
+|  | Ported 22 Hz: v4 max width (ruled out: no lid route, too long to turn) | 96.8 L | 18 in² × 27.3" | 38.5" W × 16" H × 18"/10.5" D | ~39% | 103/106/107/105/106 |
 |  | Ported 22 Hz: 16" wide + 1" grate (v2, superseded) | 69.9 L | 13 in² × 27.6" | 16.0" W, 27/24" D (v2) | ~29% (+ grate) | 102/103/105/105/106 |
 |  | **Ported 22 Hz: big** | 90.6 L | 18 in² × 29.3" | 20.2" W, 27/24" D (v2) | ~37% | 103/105/107/105/106 |
 |  | Ported 22 Hz: compact, small port | 45 L | 8 in² × 26.6" | 17.0" W, 18/15" D | ~20% | same as compact (port speed 18.3 m/s, too fast) |
@@ -33,7 +33,18 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 
 ## Layout v4: measured trunk, 18" deep, steeper seatback (2026-10-15, latest)
 
-### CAD model: `box_cad.py` → `cad/box_v4_38.5in.{dxf,FCStd,step}` (2026-10-15)
+### FINAL size: 34" W × 15.5" H × 18"/10.73" D, 82.1 L (2026-10-15, cardboard test)
+
+**Cardboard dummy result (Johann):** the 34" dummy did **not** fit through the trunk lid, so it went in through the rear seats and turned flat in the trunk (diagonal 38.5" < 39.5"). The **16" height barely cleared the pass-through, helped by the cardboard flexing**, so the height drops ½" to **15.5"**. This rules out 38.5" (no lid route, and its 42.5" diagonal can't turn) and anything much over ~35" wide.
+- The back keeps the seatback slope (25.1°), so the top gets slightly deeper: 18 − 15.5 × 7.5/16 = **10.73"**.
+- **Net 82.1 L, 16 in² slot (1.75" × 9.14") × 28.8"**, open end 4.4" from the far wall, fb 22 Hz. Max SPL 20/22/25/28/30/40 Hz = 102.9/104.4/106.1/105.1/104.8/106.3 (−0.3 dB at 22 Hz vs 16" tall, otherwise unchanged).
+- **Height can't drop further without a redesign:** at 15.5" the driver cutout clears the port shelf and the top by only **0.18" each**; at 15.0" it doesn't fit (−0.07"). Going lower would need a shorter slot (e.g. 1.5" tall) or a port that isn't under the driver.
+- **Cut list (in, ¾" MDF):** front 34 × 15.5 · back 34 × 17.118 (both long edges beveled 25.1°, parallel) · bottom 34 × 16.422 (underside; back-edge bevel, 16.070 on top) · top 34 × 9.508 (underside; back-edge bevel, 9.156 on top) · 2 ends: trapezoid 14.0 tall, 16.070 bottom / 9.508 top · port shelf 28.07 × 9.89 · port divider 28.07 × 1.75 · brace 1.5 × ~12.2.
+- Driver centre: x = 22.32" from the mouth end, z = 9.0". Clock it so no screw hole sits at 6 o'clock (T-nut vs port shelf).
+- FreeCAD check: outer 124.07 − wood 31.45 = 92.62 L of air, which is the hand calculation plus 1.5 L of baffle holes ✓. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`.
+- **Install:** through the rear seat pass-through, then turn it in the trunk. Mount the driver after the box is in place: it goes in from the front, which also keeps the box lighter for the lift.
+
+### CAD model: `box_cad.py` (first run at 38.5", 2026-10-15; 38.5" files since removed)
 
 Parametric: `python3 box_cad.py <W>` writes the DXF cut sheet; `BOX_W=<W> freecadcmd box_cad.py` also writes the FreeCAD model and STEP. It picks the largest slot (18/16/14 in²) that still fits straight with ≥ 3" at the closed end.
 - **38.5" W × 16" H × 18"/10.5" D, net 97.6 L** (gross 111.4 − port block 11.8 − driver 1.66 − brace 0.22), fb 22 Hz. This supersedes the table's 96.8 L: the real shelf and divider take slightly less volume than the earlier allowance.
