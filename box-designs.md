@@ -33,7 +33,7 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 
 ## Layout v4: measured trunk, 18" deep, steeper seatback (2026-10-15, latest)
 
-### FINAL size: 34" W × 15.5" H × 18"/10.73" D, 82.1 L (2026-10-15, cardboard test)
+### FINAL size: 34" W × 15.5" H × 18"/10.73" D, 82.1 L (2026-10-15, cardboard test; confirmed for build 2026-10-16, v5 pass-through layout dropped)
 
 **Cardboard dummy result (Johann):** the 34" dummy did **not** fit through the trunk lid, so it went in through the rear seats and turned flat in the trunk (diagonal 38.5" < 39.5"). The **16" height barely cleared the pass-through, helped by the cardboard flexing**, so the height drops ½" to **15.5"**. This rules out 38.5" (no lid route, and its 42.5" diagonal can't turn) and anything much over ~35" wide.
 - The back keeps the seatback slope (25.1°), so the top gets slightly deeper: 18 − 15.5 × 7.5/16 = **10.73"**.
