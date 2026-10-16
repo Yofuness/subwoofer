@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-15 (cardboard test: FINAL 34" W × 15.5" H, 82.1 L; installs through the rear seats)_
+_Last updated: 2026-10-15 (34×15.5 on hold: Johann wants a box that slides straight out through the pass-through; measurements coming)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
@@ -20,7 +20,13 @@ Response shape is fixed with DSP (Poweramp Equalizer → LC2i Pro). Originally t
   there's little to gain.
 - EQ is cut-only. Sub makeup gain comes from the LC2i Pro bass knob (see SUBWOOFER_EQ_NOTES.md).
 
-## FINAL size (cardboard dummy, 2026-10-15)
+## ⏸ NEXT: layout v5, a box that slides straight out through the pass-through (Johann, 2026-10-15)
+- **Why:** the 34" box has to be turned inside the trunk to come out, which needs clear floor behind it. Johann has had a broken latch before and **had to unscrew it from inside the trunk**, so a pull cord isn't enough: he needs to be able to empty the front of the trunk from the cabin quickly.
+- **Concept:** the long axis runs fore-aft, the cross-section fits the rear-seat pass-through, and it pulls straight back onto the folded seat with no rotation. A strap or handle on the seat end, and felt/UHMW skids on the bottom.
+- **Measurements Johann will bring (2026-10-16):** pass-through width × height (narrowest clear opening, seat folded) and which side it's on; the height of its bottom edge above the trunk floor; trunk depth from the seatback face to the rear wall at the floor and at the box's height (rear slope); the width available beside the pass-through; floor flatness along that path; and room in the cabin to land the box. Then do a new cardboard mock-up.
+- The 34" × 15.5" design below stays valid as the fallback.
+
+## Fallback size (cardboard dummy, 2026-10-15)
 - **34" W × 15.5" H × 18"/10.73" D, net 82.1 L, 16 in² × 28.8" floor slot, fb 22 Hz.** Cut list in box-designs.md → FINAL size. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`.
 - Why: the 34" dummy wouldn't pass the trunk lid. It went in through the rear seats and turned flat in the trunk, but at 16" tall it barely cleared the pass-through (with cardboard flex). MDF won't flex, so −½".
 - 15.5" is also the lowest height that works without redesign: the driver cutout clears the shelf and top by 0.18" each.
