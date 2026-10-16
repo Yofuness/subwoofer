@@ -36,6 +36,7 @@ The box goes on the driver's side, with the driver firing toward the passenger s
 | Rotating the box flat in the trunk | **Works at 34" W** (dummy, 2026-10-15) | Footprint diagonal √(34² + 18²) = 38.5" < 39.5" between the wells. Width ceiling for the turn ≈ √(39.5² − 18²) = 35.2" with no margin |
 | Largest box documented in a Mk4 sedan trunk | MTX JETTA10, 35¾" W | Search 2026-10-15 found no forum build with a stated larger width. Forum lore: "10s fit fine, 12s and up start to become an issue" (VWVortex, about driver depth/clearance, not box width) |
 | Lid hinges | Gas struts + conventional hinge, **not** gooseneck | Johann, 2026-10-15. Wins over Claude's earlier guess (gooseneck, from memory, wrong) |
+| Trunk-lid lock hardware | The **lock sits in the lid**. It is driven by (a) an electric **rear lid release motor** (remote, driver's-door button, handle switch) and (b) a **mechanical key cylinder in the housing behind the VW emblem**, linked by an actuator rod. The key path doesn't need power | Bentley 55-13 / 55-14 (Rear lid lock assembly, Jetta; lock cylinder housing). Confirmed. The manual doesn't mention an inside emergency release handle. US cars from MY2002 on should have one (FMVSS 401), but that's unverified for this car, so look for a glow-in-the-dark T-handle on the lid latch |
 
 - The Bentley manual (`Bentley VW MKIV Manual - Complete.pdf`, 1,984 pp) has **no** interior
   trunk dimensions. It was searched in full; don't search it again for this.
