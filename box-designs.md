@@ -44,6 +44,17 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 - FreeCAD check: outer 124.07 − wood 31.45 = 92.62 L of air, which is the hand calculation plus 1.5 L of baffle holes ✓. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`.
 - **Install:** through the rear seat pass-through, then turn it in the trunk. Mount the driver after the box is in place: it goes in from the front, which also keeps the box lighter for the lift.
 
+**Trunk share and the depth trade (2026-10-15).** Johann finds 82 L visually huge. Trunk = 368 L (Bentley, 13 ft³). The box (34 W × 15.5 H, back on the seatback slope) gets smaller by moving the front face back:
+
+| Floor depth | Top depth | Outer L | % of trunk | Net L | Port (fb 22) | Peak port v* | Max SPL 20/22/25/30/40 |
+|---|---|---|---|---|---|---|---|
+| **18" (FINAL)** | 10.73" | 124.1 | **33.7%** | 82.1 | 16 in² × 28.8" | 13.7 m/s | 102.9/104.4/106.1/104.8/106.3 |
+| 16" | 8.73" | 106.8 | 29.0% | 71.0 | 14 in² (12 in² is ~17–18 m/s ✗) | 14.5 | ~102.2/103.4/105.0/104.8/106.3 |
+| 14" | 6.73" | 89.5 | 24.3% | 57.0 | 10 in² × 26.1" | 16.6 (marginal) | 100.5/101.7/103.5/104.8/106.3 |
+| Current sealed box | | ~55 | ~15% | 37.0 | n/a | | 91.2/92.8/95.1/98.2/103.2 |
+
+\* max_spl.py's coarse grid reads ~1 m/s low. Each 2" of depth costs ~4.5 points of trunk share and ~1–1.5 dB at 20–25 Hz. Nothing above ~30 Hz changes. The SPL for 16" was modelled with 12 in²; 14 in² gives about the same output with a longer port.
+
 ### CAD model: `box_cad.py` (first run at 38.5", 2026-10-15; 38.5" files since removed)
 
 Parametric: `python3 box_cad.py <W>` writes the DXF cut sheet; `BOX_W=<W> freecadcmd box_cad.py` also writes the FreeCAD model and STEP. It picks the largest slot (18/16/14 in²) that still fits straight with ≥ 3" at the closed end.
