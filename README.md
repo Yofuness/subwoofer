@@ -106,3 +106,13 @@ to this trunk; change `D_BOT` and `SLOPE` at the top of the file for a different
 
 Phone (Poweramp Equalizer) → Bluetooth → stock head unit → AudioControl LC2i Pro → Pioneer GM-3500T bridged at 4 Ω
 (185 W RMS, fixed 80 Hz LPF, no subsonic) → TS-W304R.
+
+## License
+
+Open source, two licenses (details in [LICENSE](LICENSE)):
+
+- **Code** (`*.py`, `box_compare.html`): [MIT](LICENSE).
+- **Docs, CAD files, SketchUp model, presets and images**: [CC BY 4.0](LICENSE-CC-BY-4.0.txt). Use, adapt and share
+  them, commercially too; just credit this repo.
+
+The Bentley service manual quoted in places is copyrighted and is **not** included. Only short facts from it are cited.
