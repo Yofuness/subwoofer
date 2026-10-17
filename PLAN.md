@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-16 (v5 dropped: building the 34" × 15.5" box, 82.1 L. Next: buy MDF and cut)_
+_Last updated: 2026-10-17 (build starting: one 4×8 sheet of ¾" MDF covers the whole cut list, see box-designs.md → FINAL size)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
