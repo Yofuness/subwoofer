@@ -103,7 +103,8 @@ def ortho():
     T_ = lambda x, y: (x, oy + y)
     line(ax, [T_(0, 0), T_(W, 0), T_(W, g.D_BOT), T_(0, g.D_BOT)], close=True, lw=1.5)
     line(ax, [T_(0, g.D_TOP), T_(W, g.D_TOP)])                                          # top-panel back edge / slope start
-    line(ax, [T_(T, T), T_(W - T, T)], hidden=True)
+    line(ax, [T_(0, T), T_(W, T)])                                                       # baffle top edge | top panel joint
+    line(ax, [T_(0, yi(H)), T_(W, yi(H))])                                                # top panel | back top-edge joint
     line(ax, [T_(T, T), T_(T, yi(T)), ], hidden=True); line(ax, [T_(W - T, T), T_(W - T, yi(T))], hidden=True)
     line(ax, [T_(T, T + CW + T), T_(XE, T + CW + T), T_(XE, T)], hidden=True)          # shelf / divider footprint
     line(ax, [T_(T, T + CW), T_(XE, T + CW)], hidden=True)
@@ -114,7 +115,6 @@ def ortho():
     line(ax, [T_(DX + g.DRV_CUT/2, 0), T_(DX + g.DRV_CUT/2, T)], hidden=True)
     line(ax, [T_(T, yi(H - T)), T_(W - T, yi(H - T))], hidden=True)                                             # back inner face at the top panel
     line(ax, [T_(T, yi(T)), T_(W - T, yi(T))], hidden=True)                                                     # back inner face at the floor
-    line(ax, [T_(T, g.D_TOP - T*math.tan(TH)), T_(W - T, g.D_TOP - T*math.tan(TH))], hidden=True)              # top panel underside edge
     line(ax, [T_(0, yo(T)), T_(W, yo(T))], hidden=True)                                                          # bottom panel / back joint
     for xx in (cx0, cx1):                                                                                         # cup hole walls through the back
         line(ax, [T_(xx, yo(cz0)), T_(xx, yo(cz0) - T*math.cos(TH))], hidden=True)
@@ -132,7 +132,8 @@ def ortho():
     ox = W + 8.0
     S = lambda y, z: (ox + y, z)
     line(ax, [S(0, 0), S(g.D_BOT, 0), S(g.D_TOP, H), S(0, H)], close=True, lw=1.5)
-    line(ax, [S(T, T), S(yi(T), T), S(yi(H - T), H - T), S(T, H - T)], hidden=True, close=True)
+    line(ax, [S(T, T), S(yi(T), T), S(yi(H - T), H - T), S(T, H - T)], close=True)        # end panel (inset), visible
+    line(ax, [S(T, 0), S(T, T)]); line(ax, [S(T, H - T), S(T, H)])                         # baffle edge: full height, top/bottom behind it
     line(ax, [S(T, T + CH), S(T + CW, T + CH), S(T + CW, T)], hidden=True)                   # slot section
     line(ax, [S(T, T + CH + T), S(T + CW + T, T + CH + T), S(T + CW + T, T)], hidden=True)   # shelf + divider
     line(ax, [S(T, bz0), S(yi(bz0), bz0)], hidden=True); line(ax, [S(T, bz1), S(yi(bz1), bz1)], hidden=True)
@@ -143,10 +144,10 @@ def ortho():
     line(ax, [S(0, DZ - g.DRV_CUT/2), S(T, DZ - g.DRV_CUT/2)], hidden=True)                # driver cutout through the baffle
     line(ax, [S(0, DZ + g.DRV_CUT/2), S(T, DZ + g.DRV_CUT/2)], hidden=True)
     line(ax, [S(0, T + CH), S(T, T + CH)], hidden=True)                                    # mouth through the baffle
-    line(ax, [S(0, T), S(T, T)], hidden=True); line(ax, [S(0, H - T), S(T, H - T)], hidden=True)   # top/bottom vs baffle joints
-    line(ax, [S(yi(0), 0), S(yi(T), T)], hidden=True)                                      # bottom-panel bevel against the back
-    line(ax, [S(yi(H - T), H - T), S(yi(H), H)], hidden=True)                              # top-panel bevel against the back
+    line(ax, [S(yi(0), 0), S(yi(T), T)])                                      # bottom-panel bevel against the back
+    line(ax, [S(yi(H - T), H - T), S(yi(H), H)])                              # top-panel bevel against the back
     line(ax, [S(T, bz0), S(T, bz1)], hidden=True); line(ax, [S(yi(bz0), bz0), S(yi(bz1), bz1)], hidden=True)   # brace ends
+    note(ax, S(T/2, H*0.62), S(-5.2, H + 1.6), 'baffle: full 15 1/2" height,\ntop & bottom butt behind it')
     ax.text(ox + g.D_BOT/2, -0.9, 'RIGHT SIDE (driver end)', ha='center', fontsize=9, weight='bold')
     dim(ax, S(0, 0), S(g.D_BOT, 0), -1.2)
     dim(ax, S(0, H), S(g.D_TOP, H), 1.0)
