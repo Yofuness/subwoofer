@@ -44,7 +44,7 @@ Max SPL is the clean limit (Xmax 4.7 mm or 185 W) at 1 m half-space, before cabi
 - **Port sensitivity:** L_eff = 28.82 + 0.732·r (r = √(16/π) = 2.26") = 30.5"; fb ∝ 1/√L_eff, so 1" of port length moves fb ≈ 22 × 0.5/30.5 = **0.36 Hz**. Build as drawn and trim or shim after measuring.
 - **Terminal cup (2026-10-17, Johann): on the BACK panel**, reached through the rear-seat pass-through. Centred across the width (x = 17") and 11" up (12.15" along the slope from the bottom edge), clear of the brace (x 11.25"). Hole is a 3 × 3" placeholder: size it to the real cup. It sits against the seatback, so use a recessed cup and right-angle/flat spades, leave a slack loop, and connect before pushing the box home. Was on the front, top right.
 - Driver centre: x = 22.32" from the mouth end, z = 9.0". Clock it so no screw hole sits at 6 o'clock (T-nut vs port shelf).
-- FreeCAD check: outer 124.07 − wood 31.45 = 92.62 L of air, which is the hand calculation plus 1.5 L of baffle holes ✓. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`.
+- FreeCAD check: outer 124.07 − wood 31.45 = 92.62 L of air, which is the hand calculation plus 1.5 L of baffle holes ✓. Files: `cad/box_v4_34x15.5in.{dxf,FCStd,step}`; dimensioned drawings `cad/box_v4_34x15.5in_{ortho,parts}.{png,pdf}` (`box_drawing.py`).
 - **Install:** through the rear seat pass-through, then turn it in the trunk. Mount the driver after the box is in place: it goes in from the front, which also keeps the box lighter for the lift.
 
 **Trunk share and the depth trade (2026-10-15).** Johann finds 82 L visually huge. Trunk = 368 L (Bentley, 13 ft³). The box (34 W × 15.5 H, back on the seatback slope) gets smaller by moving the front face back:

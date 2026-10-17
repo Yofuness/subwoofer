@@ -15,6 +15,7 @@ presets for the in-car response. (It started out as a sealed design; see PLAN.md
 - `max_spl.py`: max clean SPL (Xmax / 185 W-limited) for sealed vs vented boxes; import `max_spl()` for comparisons
 - `box_compare.html`: interactive comparison page (max SPL, 1 W response, excursion @ 185 W, port speed, port length). It's the same model as `max_spl.py` ported to JS; keep the two in sync. Add new candidate boxes to `DEFAULTS` in it
 - `box_cad.py`: parametric v4 box (width as the argument): net volume, port length, DXF cut sheet in `cad/`; run under `freecadcmd` for the .FCStd/.step 3D model
+- `box_drawing.py`: dimensioned 3rd-angle orthographic + parts sheet (`cad/box_v4_34x15.5in_{ortho,parts}.{png,pdf}`), geometry pulled from `box_cad.py`; re-run after changing it
 - `eq_design.py`: models box + cabin and fits cut-only biquads, then exports the Poweramp JSON
 
 ## Keeping docs current (do this every session)
