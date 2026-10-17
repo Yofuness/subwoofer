@@ -25,6 +25,8 @@ DRV_DISP_L = 1.66
 DRV_Z = (T + CH + T + H - T) / 2  # driver centre height: middle of the gap between port shelf and top
 BRACE_X, BRACE_Z, BRACE_H = 11.25, 8.25, 1.5   # 3/4" brace, front->back
 TERM = (3.0, 3.0)               # terminal-cup hole placeholder, measure the old cup
+TERM_Z = 11.0                   # cup centre height on the BACK panel (reached through the rear-seat pass-through);
+                                # centred across the width, so it clears the brace and reads the same from either side
 C = 343.0
 IN3_L = 0.016387064
 
@@ -58,12 +60,13 @@ def panels(d):
     P = []
     # name, qty, polygon (u,v) of the larger face, dashed bevel line or None, holes, note
     front_holes = [('rect', T, T, T + CW, T + CH, 'port mouth'),
-                   ('circle', d['drv_x'], DRV_Z, DRV_CUT/2, 'driver cutout 11.14"'),
-                   ('rect', W - T - 1.0 - TERM[0], H - T - 1.0 - TERM[1], W - T - 1.0, H - T - 1.0, 'terminal cup (size to your cup)')]
+                   ('circle', d['drv_x'], DRV_Z, DRV_CUT/2, 'driver cutout 11.14"')]
     P.append(('FRONT baffle', 1, [(0,0),(W,0),(W,H),(0,H)], None, front_holes,
               f'{W:.3f} x {H:.3f}  drawn as seen from OUTSIDE (trunk-lid side)'))
     bl = math.hypot(D_BOT - D_TOP, H)
-    P.append(('BACK', 1, [(0,0),(W,0),(W,bl),(0,bl)], None, [],
+    tv = TERM_Z / math.cos(TH)                              # cup centre, measured along the slope from the bottom edge
+    back_holes = [('rect', W/2 - TERM[0]/2, tv - TERM[1]/2, W/2 + TERM[0]/2, tv + TERM[1]/2, 'terminal cup (size to your cup)')]
+    P.append(('BACK', 1, [(0,0),(W,0),(W,bl),(0,bl)], None, back_holes,
               f'{W:.3f} x {bl:.3f}  both long edges bevel 25.1 deg, parallel (ends horizontal)'))
     bd = yi(0) - T
     P.append(('BOTTOM', 1, [(0,0),(W,0),(W,bd),(0,bd)], ('h', bd - b), [],
@@ -169,10 +172,15 @@ def build_freecad(d, stem):
     front = box(0, 0, 0, W, T, H)
     front = front.cut(box(T, -1, T, T + CW, T + 1, T + CH))
     front = front.cut(Part.makeCylinder(DRV_CUT/2*s, 3*s, V(d['drv_x']*s, -1*s, DRV_Z*s), V(0,1,0)))
-    front = front.cut(box(W-T-1-TERM[0], -1, H-T-1-TERM[1], W-T-1, T+1, H-T-1))
+    # terminal-cup hole square to the sloped back face
+    c, n, u = (yo(TERM_Z), TERM_Z), (math.cos(TH), math.sin(TH)), (-math.sin(TH), math.cos(TH))
+    hp = [(c[0] + a*n[0] + b*u[0], c[1] + a*n[1] + b*u[1]) for a, b in
+          [(1, -TERM[1]/2), (-2, -TERM[1]/2), (-2, TERM[1]/2), (1, TERM[1]/2)]]
+    back = prism_yz([(yo(0),0),(yi(0),0),(yi(H),H),(yo(H),H)], 0, W).cut(
+        prism_yz(hp, W/2 - TERM[0]/2, W/2 + TERM[0]/2))
     parts = {
         'Front': front,
-        'Back': prism_yz([(yo(0),0),(yi(0),0),(yi(H),H),(yo(H),H)], 0, W),
+        'Back': back,
         'Bottom': prism_yz([(T,0),(yi(0),0),(yi(T),T),(T,T)], 0, W),
         'Top': prism_yz([(T,H-T),(yi(H-T),H-T),(yi(H),H),(T,H)], 0, W),
         'End_L': prism_yz([(T,T),(yi(T),T),(yi(H-T),H-T),(T,H-T)], 0, T),
