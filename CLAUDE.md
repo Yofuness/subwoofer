@@ -25,7 +25,7 @@ presets for the in-car response. (It started out as a sealed design; see PLAN.md
 - When values conflict, record both and explain which one wins and why. Don't silently overwrite.
 
 ## Git
-- Git repo on `main` (local only, no remote). Commit doc/model changes as you go. `.gitignore` excludes all PDFs (the Bentley manual is proprietary).
+- Git repo on `main`, remote `origin` = `git@github.com:Yofuness/subwoofer.git`. Push after committing. Commit doc/model changes as you go. `.gitignore` excludes all PDFs (the Bentley manual is proprietary).
 
 ## Working with the user
 - Technically minded. Show the math and the mechanism behind every recommendation.
