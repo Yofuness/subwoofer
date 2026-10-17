@@ -87,6 +87,7 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [ ] Measure the in-car response (REW / RTA) and replace the assumed cabin gain in `eq_design.py`
 - [x] **EQ presets for the ported FINAL box** (2026-10-17): `poweramp_presets/Subwoofer_Ported22_*.json`, modelled (cabin gain assumed). Subsonic 24 dB/oct @ 21 Hz, kept under Xmax. See SUBWOOFER_EQ_NOTES.md
 - [ ] Re-fit the EQ presets to the final box + measurement. **For the ported box: the subsonic filter at ~23 Hz (≥ 24 dB/oct) is mandatory**, because the amp has none. Stack Poweramp low shelves, or use the LC2i Pro if it has one
+- [ ] **Port chuffing (Johann, 2026-10-17): audible, tolerable in the trunk.** Model port speed at 27 V: 14.4 m/s @ 20 Hz, 12.3 @ 22, 10.1 @ 25 (17.1 @ 18, but the subsonic cuts that). Square mouth + sharp 90° bend chuffs from ~10–12 m/s, so it's likely the edges. Check first: 20 Hz vs 40 Hz tone. Noise only at 20 = velocity; hiss at both = air leak (shelf joints, terminal cup). Fixes: 1/2" roundover on the outside mouth edges, roundover on the inner bend edge (x = 9 7/8"), 45° fillet block in the outer bend corner, roundover on the open end (x = 28 13/16"). Silicone the shelf joints if it's a leak
 - [ ] After building: measure fb (impedance dip or port-output peak) and trim the port to hit ~22 Hz
 
 ## Amp question (2026-10-13)
