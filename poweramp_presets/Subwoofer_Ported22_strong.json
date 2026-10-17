@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Sub Ported22 - Strong (-15)",
+    "preamp": 0.0,
+    "parametric": true,
+    "bands": [
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 12,
+        "q": 0.71,
+        "gain": -10.2,
+        "color": 0
+      },
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 12,
+        "q": 0.71,
+        "gain": -10.2,
+        "color": 0
+      },
+      {
+        "type": 1,
+        "channels": 0,
+        "frequency": 134,
+        "q": 0.71,
+        "gain": -14.9,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 13,
+        "q": 2.39,
+        "gain": -9.5,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 37,
+        "q": 2.91,
+        "gain": -2.8,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 147,
+        "q": 1.45,
+        "gain": -5.4,
+        "color": 0
+      }
+    ]
+  }
+]

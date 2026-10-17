@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Sub Ported22 - Mild (-6)",
+    "preamp": 0.0,
+    "parametric": true,
+    "bands": [
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 12,
+        "q": 0.71,
+        "gain": -9.8,
+        "color": 0
+      },
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 12,
+        "q": 0.71,
+        "gain": -10.1,
+        "color": 0
+      },
+      {
+        "type": 1,
+        "channels": 0,
+        "frequency": 125,
+        "q": 0.71,
+        "gain": -6.0,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 13,
+        "q": 2.38,
+        "gain": -9.7,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 39,
+        "q": 2.43,
+        "gain": -3.0,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 143,
+        "q": 1.6,
+        "gain": -1.7,
+        "color": 0
+      }
+    ]
+  }
+]

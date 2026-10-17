@@ -1,5 +1,44 @@
 # Subwoofer EQ Correction Project: Notes
 
+## ▶ CURRENT: presets for the ported FINAL box (82.1 L @ 22 Hz), added 2026-10-17
+
+`python3 eq_design.py` (needs numpy + scipy) → `poweramp_presets/Subwoofer_Ported22_{All,mild,strong,max}.json`,
+full output in `poweramp_presets/design_output_ported22.txt`. The old `Subwoofer_Flatten_*` presets below are for
+the old sealed box only (`python3 eq_design.py sealed`).
+
+**Model:** the 1 V response comes from `max_spl.solve(82.1, 22, Ql=7)`, the same lumped model as `box_compare.html`.
+The cabin gain is the same assumption as before (+9 dB/oct below 55 Hz, **not measured**). Together they give an
+in-car response that's **nearly flat from 18 to 50 Hz** (88 dB/V ±0.5): the box is falling below fb just as
+cabin gain rises. Above that it sags to −4 dB at 80 Hz relative to the plateau.
+
+**Target (cut-only, never above 0 dB):**
+- **22–63 Hz:** flattened to the band's weakest point. In practice that cuts about 3 dB at 35–45 Hz, where box and cabin overlap.
+- **63–160 Hz:** log blend into the highs cut. The amp's fixed 80 Hz / 12 dB LPF does the real crossover.
+- **Below 22 Hz: subsonic = 4th-order Butterworth (24 dB/oct) at 21 Hz,** capped so the cone stays under Xmax.
+  The cap is max in-car SPL(f) − (the flat in-band max) − 3 dB margin. The flat in-band max is **111.9 dB at 40 Hz**,
+  Xmax-limited, at 1 m before cabin gain. The fit leaves **1.4 dB** of margin at 12 Hz, where it's tightest, and more above that.
+  A ported box unloads below fb (x at 27 V: 4.9 mm @ 20 Hz, 10.5 @ 18, 22 @ 15, 25 @ 12), and the GM-3500T has
+  no subsonic, so these presets are the driver's only protection.
+- **Above 160 Hz:** −6 / −15 / −30 dB depending on the preset.
+
+| Preset | Low shelves | High shelf | Peaks |
+|---|---|---|---|
+| **Mild (−6)** | 12 Hz −9.8, 12 Hz −10.1 | 125 Hz −6.0 | 13 Hz Q2.38 −9.7 · 39 Hz Q2.43 −3.0 · 143 Hz Q1.60 −1.7 |
+| **Strong (−15)** | 12 Hz −10.2 ×2 | 134 Hz −14.9 | 13 Hz Q2.39 −9.5 · 37 Hz Q2.91 −2.8 · 147 Hz Q1.45 −5.4 |
+| **Max (−30)** | 12 Hz −10.3, −10.4 | 154 Hz −15.0 | 13 Q2.46 −9.3 · 36 Q3.77 −2.3 · 102 Q3.55 −6.3 · 137 Q2.63 −9.1 · 176 Q2.14 −12.0 · 338 Q0.92 −10.2 · 1701 Q0.30 −14.2 · 15368 Q0.30 −15.0 |
+
+All shelves are Q 0.71. Resulting cut (Mild): 12 Hz −18.3, 15 −12.7, 18 −6.8, 20 −4.8, 25 −2.6, 40 −3.5, 60 −1.1, 80 −1.5 dB.
+Fit error is ≤ 1.6 dB (Mild) / 2.0 (Strong) / 4.2 (Max, in the 250 Hz stacked-cut region).
+
+**Gain setting (important):** from 35 to 50 Hz the driver reaches Xmax about **5–6 dB before the amp clips** (at 40 Hz, 9.0 mm at 27 V).
+So turning the LC2i up until the amp clips will push the cone past Xmax in that band. Set sub level by ear and
+back off at the first sign of distortion or slapping. The EQ can't fix this, because it's a level issue, not a shape one.
+
+**After the build:** measure fb (impedance dip). If it lands off 22 Hz, change `FB_PORTED` and re-run.
+Then measure in-car with REW and replace `room`. The cabin-gain guess is still the biggest uncertainty.
+
+---
+
 Project: Poweramp Equalizer presets that correct the in-car bass response of a
 sealed Pioneer TS-W304R box using **cut-only** EQ, so the head unit and the car's
 factory speakers never see a boosted signal. Sub level is made up downstream with

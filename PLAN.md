@@ -1,6 +1,6 @@
 # Plan & status
 
-_Last updated: 2026-10-17 (build starting: one 4×8 sheet of ¾" MDF covers the whole cut list; terminal cup moved to the back panel, see box-designs.md → FINAL size)_
+_Last updated: 2026-10-17 (ported-box Poweramp presets made: `Subwoofer_Ported22_*.json`, 24 dB/oct subsonic @ 21 Hz; build starting: one 4×8 sheet of ¾" MDF covers the whole cut list; terminal cup moved to the back panel, see box-designs.md → FINAL size)_
 
 ## Goal
 An enclosure for the Pioneer TS-W304R in the 2005 Mk4 Jetta TDI trunk. It sits against the rear
@@ -85,6 +85,7 @@ Phone (Poweramp EQ) → Bluetooth (XY-BT-MINI BT 4.1 board, 3.5 mm out, 100 µF 
 - [ ] **REW test matrix** (mic at the driver's head): rear seats up vs folded · pass-through closed vs open (if fitted) · sub rear-firing vs up-firing vs firing at the seatback. Johann reports that low bass drops a lot with the seats up. Likely cause: trunk pressure escaping out the body vents instead of reaching the cabin through the seatback
 - [ ] Future project (Johann): deadening under the carpet and in the doors, plus new door seals. Expect the same or slightly more deep bass (a tighter cabin gives more pressure gain below ~30 Hz) and far fewer rattles. **Re-measure in REW and re-fit the EQ afterwards**, or do the deadening before the final measurement
 - [ ] Measure the in-car response (REW / RTA) and replace the assumed cabin gain in `eq_design.py`
+- [x] **EQ presets for the ported FINAL box** (2026-10-17): `poweramp_presets/Subwoofer_Ported22_*.json`, modelled (cabin gain assumed). Subsonic 24 dB/oct @ 21 Hz, kept under Xmax. See SUBWOOFER_EQ_NOTES.md
 - [ ] Re-fit the EQ presets to the final box + measurement. **For the ported box: the subsonic filter at ~23 Hz (≥ 24 dB/oct) is mandatory**, because the amp has none. Stack Poweramp low shelves, or use the LC2i Pro if it has one
 - [ ] After building: measure fb (impedance dip or port-output peak) and trim the port to hit ~22 Hz
 
