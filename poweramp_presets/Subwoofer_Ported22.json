@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Sub Ported22",
+    "preamp": 0.0,
+    "parametric": true,
+    "bands": [
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 16,
+        "q": 1.4,
+        "gain": -5.1,
+        "color": 0
+      },
+      {
+        "type": 0,
+        "channels": 0,
+        "frequency": 18,
+        "q": 1.4,
+        "gain": -8.3,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 16,
+        "q": 2.7,
+        "gain": -4.2,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 18,
+        "q": 5.75,
+        "gain": -2.1,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 28,
+        "q": 2.5,
+        "gain": -2.0,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 45,
+        "q": 1.94,
+        "gain": -2.6,
+        "color": 0
+      },
+      {
+        "type": 2,
+        "channels": 0,
+        "frequency": 61,
+        "q": 2.18,
+        "gain": -1.1,
+        "color": 0
+      }
+    ]
+  }
+]

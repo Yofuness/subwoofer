@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Model the TS-W304R box in a VW Mk4 cabin and fit cut-only Poweramp EQ presets.
 
-    python3 eq_design.py          -> ported FINAL box (82.1 L @ 22 Hz)  -> poweramp_presets/Subwoofer_Ported22_*.json
+    python3 eq_design.py          -> ported FINAL box (82.1 L @ 22 Hz)  -> poweramp_presets/Subwoofer_Ported22.json
+                                     one preset, box-only (no cabin gain), nothing touched above 100 Hz
     python3 eq_design.py sealed   -> old sealed box (legacy presets)    -> poweramp_presets/Subwoofer_Flatten_*.json
 """
 import json, sys
@@ -30,7 +31,7 @@ SUBSONIC = [(20.0, -6.0), (15.0, -12.0)]  # extra cut below the sub band (excurs
 PORTED = len(sys.argv) < 2 or sys.argv[1] != "sealed"
 VB_PORTED, FB_PORTED, QL_PORTED = 82.1, 22.0, 7.0
 if PORTED:
-    SUB_BAND = (22.0, 63.0)        # flattened band; 63-80 rolls into the amp's fixed 80 Hz / 12 dB LPF
+    SUB_BAND = (22.0, 100.0)       # cut the box's 40-60 Hz hump down to its 100 Hz level; 0 dB from 100 Hz up
     SUBSONIC_FC = 21.0             # target = 4th-order Butterworth HPF (24 dB/oct) below the band
     EXC_MARGIN = 3.0               # keep >= 3 dB under the Xmax limit below the band (see excursion_cap_db)
 
@@ -56,14 +57,11 @@ def ported_db(f):
 
 
 def excursion_cap_db(f, room):
-    """Most the EQ may leave below the band (dB re the flat in-band level) so that, with the LC2i gain set
-    for the loudest flat level the driver can do in the band, the cone stays under Xmax - EXC_MARGIN.
-    Max in-car SPL(f) = room(f) + 20 log10(min(V_amp, Xmax / x(f))); flat level = min of that over the band."""
-    spl1, x = ported_db(f)
+    """Most the EQ may leave (dB re its 0 dB passband) so the cone stays EXC_MARGIN under Xmax when the 0 dB
+    part of the passband is driven to the amp's full 27 V: 20 log10(min(V_amp, Xmax / x(f)) / V_amp) - margin."""
+    _, x = ported_db(f)
     vmax = np.minimum(max_spl.V_AMP, max_spl.XMAX / x)
-    max_incar = room + 20 * np.log10(vmax)
-    band = (f >= SUB_BAND[0]) & (f <= SUB_BAND[1])
-    return max_incar - max_incar[band].min() - EXC_MARGIN, max_incar
+    return 20 * np.log10(vmax / max_spl.V_AMP) - EXC_MARGIN, vmax
 
 
 def box_db(f, fc, qtc):
@@ -124,50 +122,58 @@ def target_db(f, room, highs_cut):
 
 def target_ported(f, room, highs_cut):
     in_band = (f >= SUB_BAND[0]) & (f <= SUB_BAND[1])
-    t = np.minimum(0.0, room[in_band].min() - room)               # cut-only flatten
+    t = np.minimum(0.0, np.interp(SUB_BAND[1], f, room) - room)   # cut-only: hump down to the 100 Hz level
+    t[~in_band] = 0.0
     t_lo = np.interp(SUB_BAND[0], f, t)
     lo = f < SUB_BAND[0]
     hpf = -10 * np.log10(1 + (SUBSONIC_FC / f) ** 8)              # 4th-order Butterworth magnitude
     t[lo] = t_lo + hpf[lo] - np.interp(SUB_BAND[0], f, hpf)
     cap, _ = excursion_cap_db(f, room)
     t[lo] = np.minimum(t[lo], cap[lo])
-    t_hi = np.interp(SUB_BAND[1], f, t)
-    blend = (f > SUB_BAND[1]) & (f < BLEND_END)
-    xb = np.log(f[blend] / SUB_BAND[1]) / np.log(BLEND_END / SUB_BAND[1])
-    t[blend] = t_hi + (-highs_cut - t_hi) * xb
-    t[f >= BLEND_END] = -highs_cut
-    return t - max(0.0, t.max())
+    return t
 
 
 def fit(f, target, n_pk):
     n_ls = 2 if PORTED else 1
-    pk_f0 = (np.r_[13.0, 40.0, np.geomspace(110, 12000, n_pk - 2)] if PORTED   # subsonic notch + in-band dip first
+    n_hs = 0 if PORTED else 1                                                  # no high shelf: flat above 100 Hz
+    pk_f0 = (np.r_[13.0, 18.0, 45.0, np.geomspace(60, 80, n_pk - 3)] if PORTED   # subsonic notches + hump
              else np.geomspace(35, 12000, n_pk))
     # params: LSC f,g (x n_ls) | HSC f,g | per PK: logf, q, g
     x0, lo, hi = [], [], []
+    nq = 1 if PORTED else 0                       # ported: shelf Q is free (steeper subsonic knee)
     for k in range(n_ls):
-        x0 += [np.log(18 + 2 * k), -12]; lo += [np.log(12), -15]; hi += [np.log(30), 0]
-    x0 += [np.log(110), -6]; lo += [np.log(70), -15]; hi += [np.log(400), 0]
-    pk0 = 2 * n_ls + 2
+        x0 += [np.log(18 + 2 * k), -12] + [0.707] * nq
+        lo += [np.log(12), -15] + [0.5] * nq
+        hi += [np.log(30), 0] + [1.4] * nq
+    sl = 2 + nq
+    if n_hs:
+        x0 += [np.log(110), -6]; lo += [np.log(70), -15]; hi += [np.log(400), 0]
+    pk0 = sl * n_ls + 2 * n_hs
     for fp in pk_f0:
         x0 += [np.log(fp), 1.0, -3]
         lo += [np.log(12 if PORTED else 25), 0.3, -15]
-        hi += [np.log(16000), 6.0, 0]
+        hi += [np.log(90 if PORTED else 16000), 6.0, 0]
     w = np.where(f < 200, 3.0, 1.0)
     if PORTED:
         w = np.where(f < SUB_BAND[0], 6.0, w)      # the subsonic is driver protection: fit it hardest
         w = np.where((f >= SUB_BAND[0]) & (f <= SUB_BAND[1]), 5.0, w)
+        w = np.where(f > SUB_BAND[1], 8.0, w)      # must stay ~0 dB above 100 Hz
 
     def bands_from(x):
-        bands = [{"type": 0, "frequency": float(np.exp(x[2 * k])), "q": 0.707, "gain": float(x[2 * k + 1])}
-                 for k in range(n_ls)]
-        bands.append({"type": 1, "frequency": float(np.exp(x[2 * n_ls])), "q": 0.707, "gain": float(x[2 * n_ls + 1])})
+        bands = [{"type": 0, "frequency": float(np.exp(x[sl * k])), "q": float(x[sl * k + 2]) if nq else 0.707,
+                  "gain": float(x[sl * k + 1])} for k in range(n_ls)]
+        if n_hs:
+            bands.append({"type": 1, "frequency": float(np.exp(x[sl * n_ls])), "q": 0.707, "gain": float(x[sl * n_ls + 1])})
         for k in range(n_pk):
             lf, q, g = x[pk0 + 3 * k: pk0 + 3 + 3 * k]
             bands.append({"type": 2, "frequency": float(np.exp(lf)), "q": float(q), "gain": float(g)})
         return bands
 
-    res = least_squares(lambda x: w * (eq_db(bands_from(x), f) - target), x0, bounds=(lo, hi), max_nfev=20000)
+    def resid(x):
+        e = eq_db(bands_from(x), f)
+        r = w * (e - target)
+        return np.r_[r, 30 * np.maximum(0.0, e)] if PORTED else r   # ported: hard penalty on any boost (cut-only)
+    res = least_squares(resid, x0, bounds=(lo, hi), max_nfev=20000)
     return bands_from(res.x)
 
 
@@ -192,12 +198,12 @@ def to_poweramp(name, bands):
 def main():
     f = np.geomspace(12 if PORTED else 15, 20000, 400)
     if PORTED:
-        print(f"Ported: Vb {VB_PORTED} L, fb {FB_PORTED} Hz, Ql {QL_PORTED}; flatten {SUB_BAND[0]:g}-{SUB_BAND[1]:g} Hz, "
-              f"subsonic 24 dB/oct @ {SUBSONIC_FC:g} Hz, capped {EXC_MARGIN:g} dB under Xmax")
+        print(f"Ported: Vb {VB_PORTED} L, fb {FB_PORTED} Hz, Ql {QL_PORTED}; box only (no cabin gain); hump cut to the "
+              f"{SUB_BAND[1]:g} Hz level, 0 dB above; subsonic 24 dB/oct @ {SUBSONIC_FC:g} Hz, {EXC_MARGIN:g} dB under Xmax at 27 V")
         box1, _ = ported_db(f)
         box1 -= np.interp(100, f, box1)
-        room = box1 + cabin_db(f)
-        presets_def = [dict(p, name=p["name"].replace("Sub Flatten", "Sub Ported22")) for p in PRESETS]
+        room = box1
+        presets_def = [{"name": "Sub Ported22", "highs_cut": 0.0, "n_pk": 5}]
         prefix = "Subwoofer_Ported22"
     else:
         vb_gross, vb, alpha, qtc, fc = box_numbers()
@@ -226,13 +232,17 @@ def main():
             kind = {0: "LowShelf", 1: "HighShelf", 2: "Peak"}[b["type"]]
             print(f"  {kind:9s} {b['frequency']:6d} Hz  Q {b['q']:5.2f}  {b['gain']:+6.1f} dB")
 
-    box_r = np.interp(report_f, f, room - cabin_db(f)) if PORTED else box_db(np.array(report_f, float), fc, qtc)
+    box_r = np.interp(report_f, f, room) if PORTED else box_db(np.array(report_f, float), fc, qtc)
     room_r = np.interp(report_f, f, room)
     print("\nFreq | box | box+cabin | " + " | ".join(f"{n} target/EQ" for n in rows))
     for i, fr in enumerate(report_f):
         cols = " | ".join(f"{rows[n][0][i]:+6.1f}/{rows[n][1][i]:+6.1f}" for n in rows)
         print(f"{fr:5d} | {box_r[i]:+6.1f} | {room_r[i]:+6.1f} | {cols}")
 
+    if PORTED:
+        with open(f"poweramp_presets/{prefix}.json", "w") as fh:
+            json.dump(presets, fh, indent=2)
+        return
     with open(f"poweramp_presets/{prefix}_All.json", "w") as fh:
         json.dump(presets, fh, indent=2)
     for pa in presets:

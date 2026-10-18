@@ -1,28 +1,43 @@
 # Subwoofer EQ Correction Project: Notes
 
-## ▶ CURRENT: presets for the ported FINAL box (82.1 L @ 22 Hz), added 2026-10-17
+## ▶ CURRENT: one preset for the ported FINAL box (82.1 L @ 22 Hz), revised 2026-10-18
 
-`python3 eq_design.py` (needs numpy + scipy) → `poweramp_presets/Subwoofer_Ported22_{All,mild,strong,max}.json`,
-full output in `poweramp_presets/design_output_ported22.txt`. The old `Subwoofer_Flatten_*` presets below are for
-the old sealed box only (`python3 eq_design.py sealed`).
+`python3 eq_design.py` (needs numpy + scipy) → **`poweramp_presets/Subwoofer_Ported22.json`** (one preset, "Sub Ported22").
+Full output: `poweramp_presets/design_output_ported22.txt`. Supersedes the 2026-10-17 Mild/Strong/Max ported set, which is deleted.
+The old `Subwoofer_Flatten_*` presets are for the old sealed box only (`python3 eq_design.py sealed`).
 
-**Model:** the 1 V response comes from `max_spl.solve(82.1, 22, Ql=7)`, the same lumped model as `box_compare.html`.
-The cabin gain is the same assumption as before (+9 dB/oct below 55 Hz, **not measured**). Together they give an
-in-car response that's **nearly flat from 18 to 50 Hz** (88 dB/V ±0.5): the box is falling below fb just as
-cabin gain rises. Above that it sags to −4 dB at 80 Hz relative to the plateau.
+**Johann's brief (2026-10-18):** one sub profile, **nothing touched above 100 Hz**, **no cabin gain** in the model.
+
+**Model:** box only. The 1 V response comes from `max_spl.solve(82.1, 22, Ql=7)`, the same lumped model as `box_compare.html`,
+normalised to 100 Hz. Relative to 100 Hz it's 18 Hz −8.7, 20 −7.4, 25 −4.7, 30 −2.2, 35 −0.1, 40 +1.2, 45–50 +1.8, 60 +1.4, 80 +0.5.
 
 **Target (cut-only, never above 0 dB):**
-- **22–63 Hz:** flattened to the band's weakest point. In practice that cuts about 3 dB at 35–45 Hz, where box and cabin overlap.
-- **63–160 Hz:** log blend into the highs cut. The amp's fixed 80 Hz / 12 dB LPF does the real crossover.
-- **Below 22 Hz: subsonic = 4th-order Butterworth (24 dB/oct) at 21 Hz,** capped so the cone stays under Xmax.
-  The cap is max in-car SPL(f) − (the flat in-band max) − 3 dB margin. The flat in-band max is **111.9 dB at 40 Hz**,
-  Xmax-limited, at 1 m before cabin gain. The fit leaves **1.4 dB** of margin at 12 Hz, where it's tightest, and more above that.
-  A ported box unloads below fb (x at 27 V: 4.9 mm @ 20 Hz, 10.5 @ 18, 22 @ 15, 25 @ 12), and the GM-3500T has
-  no subsonic, so these presets are the driver's only protection.
-- **Above 160 Hz:** −6 / −15 / −30 dB depending on the preset.
+- **22–100 Hz:** cut the 40–60 Hz hump down to the 100 Hz level (−1.8 dB at 45–50). The deep end below ~35 Hz is left at 0 dB.
+  It sits below the 100 Hz level, and a cut-only EQ can't lift it, so in the car cabin gain fills it in naturally.
+- **≥ 100 Hz: 0 dB.** No high shelf. The fit holds ≤ 0.1 dB of deviation there.
+- **Below 22 Hz: subsonic** = 4th-order Butterworth (24 dB/oct) at 21 Hz, capped at **3 dB under Xmax with the passband driven at
+  the amp's full 27 V**: cap = 20 log10(min(27 V, Xmax/x(f)) / 27 V) − 3 dB. That's stricter than the 10-17 version, which
+  referenced the cabin-gain level. The fit stays **1.7 dB under the Xmax limit** at its tightest point.
 
-| Preset | Low shelves | High shelf | Peaks |
+| Type | Hz | Q | Gain |
 |---|---|---|---|
+| Low shelf | 16 | 1.40 | −5.1 |
+| Low shelf | 18 | 1.40 | −8.3 |
+| Peak | 16 | 2.70 | −4.2 |
+| Peak | 18 | 5.75 | −2.1 |
+| Peak | 28 | 2.50 | −2.0 |
+| Peak | 45 | 1.94 | −2.6 |
+| Peak | 61 | 2.18 | −1.1 |
+
+Net EQ: 12 Hz −17.5, 15 −16.0, 18 −10.4, 20 −4.6, 25–35 ≈ −0.1, 40 −1.1, 45–50 −1.9, 60 −1.5, 80 −0.5, ≥100 0.0 dB.
+Max fit error is 1.3 dB, and the highest point is 0.0 dB. The Q 1.4 shelves give the steep knee. An overshoot (boost) penalty in the fit keeps it cut-only.
+The 28 Hz peak and the shelves' rebound cancel out to about 0 dB at 25–35 Hz.
+
+**Gain setting still matters:** from 35 to 50 Hz the driver reaches Xmax about 5–6 dB before the amp clips (9.0 mm at 40 Hz, 27 V). Set the LC2i by ear.
+
+**After the build:** measure fb. If it isn't 22 Hz, change `FB_PORTED` and re-run.
+
+---|---|---|---|
 | **Mild (−6)** | 12 Hz −9.8, 12 Hz −10.1 | 125 Hz −6.0 | 13 Hz Q2.38 −9.7 · 39 Hz Q2.43 −3.0 · 143 Hz Q1.60 −1.7 |
 | **Strong (−15)** | 12 Hz −10.2 ×2 | 134 Hz −14.9 | 13 Hz Q2.39 −9.5 · 37 Hz Q2.91 −2.8 · 147 Hz Q1.45 −5.4 |
 | **Max (−30)** | 12 Hz −10.3, −10.4 | 154 Hz −15.0 | 13 Q2.46 −9.3 · 36 Q3.77 −2.3 · 102 Q3.55 −6.3 · 137 Q2.63 −9.1 · 176 Q2.14 −12.0 · 338 Q0.92 −10.2 · 1701 Q0.30 −14.2 · 15368 Q0.30 −15.0 |
